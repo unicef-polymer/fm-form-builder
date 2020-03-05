@@ -1,4 +1,4 @@
-import {customElement, LitElement, property, TemplateResult, html, CSSResultArray, css} from 'lit-element';
+import {LitElement, property, TemplateResult, html, CSSResultArray, css} from 'lit-element';
 import '../form-fields/text-field';
 import '../form-fields/number-field';
 import '../form-fields/scale-field';
@@ -9,12 +9,13 @@ import {pageLayoutStyles} from '../lib/styles/page-layout-styles';
 import {elevationStyles} from '../lib/styles/elevation-styles';
 import {CardStyles} from '../lib/styles/card-styles';
 import {FlexLayoutClasses} from '../lib/styles/flex-layout-classes';
-import {FormBuilderCardStyles} from '../lib/styles/form-builder-card.styles';
+import {FormBuilderCardStyles} from '..';
 import {InputStyles} from '../lib/styles/input-styles';
 import {fireEvent} from '../lib/utils/fire-custom-event';
 import {IFormBuilderAbstractGroup} from '../lib/types/form-builder.interfaces';
 import {BlueprintField, BlueprintGroup, BlueprintMetadata} from '../lib/types/form-builder.types';
 import {GenericObject} from '../lib/types/global.types';
+import {clone} from 'ramda';
 
 export enum FieldTypes {
   FILE_TYPE = 'file',
@@ -35,13 +36,22 @@ export enum StructureTypes {
   ATTACHMENTS_BUTTON = 'floating_attachments'
 }
 
-@customElement('form-builder-group')
 export class FormBuilderGroup extends LitElement implements IFormBuilderAbstractGroup {
   @property({type: Object}) groupStructure!: BlueprintGroup;
   @property({type: Object}) metadata!: BlueprintMetadata;
   @property({type: String}) parentGroupName: string = '';
   @property({type: Boolean, attribute: 'readonly', reflect: true}) readonly: boolean = true;
-  @property({type: Object}) value: GenericObject = {};
+
+  /**
+   * Make value property immutable
+   * @param value
+   */
+  set value(value: GenericObject) {
+    this._value = this.groupStructure.name === 'root' ? clone(value) : value;
+  }
+  get value(): GenericObject {
+    return this._value;
+  }
 
   /**
    * Setter for handling error.
@@ -59,6 +69,7 @@ export class FormBuilderGroup extends LitElement implements IFormBuilderAbstract
     }
   }
   @property() protected _errors: GenericObject = {};
+  @property() protected _value: GenericObject = {};
 
   render(): TemplateResult {
     if (!this.groupStructure || !this.metadata) {

@@ -5,8 +5,8 @@ import {elevationStyles} from '../styles/elevation-styles';
 import {FlexLayoutClasses} from '../styles/flex-layout-classes';
 import {fireEvent} from '../utils/fire-custom-event';
 
-@customElement('etools-card')
-export class EtoolsCard extends LitElement {
+@customElement('etools-fb-card')
+export class EtoolsFbCard extends LitElement {
   @property({attribute: 'card-title'})
   cardTitle!: string;
 

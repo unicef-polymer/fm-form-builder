@@ -1,15 +1,15 @@
-import {ChecklistAttachmentsPopup} from './checklist-attachments-popup';
+import {FormAttachmentsPopup} from './form-attachments-popup.base';
 import {html, TemplateResult} from 'lit-html';
-import {InputStyles} from '../../styles/input-styles';
-import {DialogStyles} from '../../styles/dialog-styles';
+import {InputStyles} from '../lib/styles/input-styles';
+import {DialogStyles} from '../lib/styles/dialog-styles';
 import '@unicef-polymer/etools-upload/etools-upload-multi';
 import '@unicef-polymer/etools-dialog/etools-dialog';
 import '@unicef-polymer/etools-dropdown/etools-dropdown';
 import '@polymer/paper-button/paper-button';
 import '@polymer/iron-icons/iron-icons';
-import {GenericObject} from '../../types/global.types';
+import {GenericObject} from '../lib/types/global.types';
 
-export function template(this: ChecklistAttachmentsPopup): TemplateResult {
+export function template(this: FormAttachmentsPopup): TemplateResult {
   return html`
     ${InputStyles} ${DialogStyles}
     <style>
@@ -44,10 +44,11 @@ export function template(this: ChecklistAttachmentsPopup): TemplateResult {
       @close="${this.onClose}"
       @confirm-btn-clicked="${() => this.saveChanges()}"
     >
+      <!--  Link is used to download attachments  -->
       <a id="link" target="_blank" hidden></a>
 
       <div>
-        ${this.attachments.map(
+        ${this.attachments?.map(
           (attachment: GenericObject, index: number) => html`
             <div class="file-selector-container with-type-dropdown">
               <!--        Type select Dropdown        -->
@@ -63,7 +64,7 @@ export function template(this: ChecklistAttachmentsPopup): TemplateResult {
                 ?readonly="${this.readonly}"
                 ?disabled="${this.readonly}"
                 hide-search
-                .options="${this.metadata.options.target_attachments_file_types.values}"
+                .options="${this.metadata?.options.target_attachments_file_types?.values}"
                 option-label="label"
                 option-value="value"
                 ?invalid="${!attachment.file_type && this.saveBtnClicked}"
@@ -104,7 +105,7 @@ export function template(this: ChecklistAttachmentsPopup): TemplateResult {
           class="with-padding"
           ?hidden="${this.readonly}"
           @upload-finished="${({detail}: CustomEvent) => this.attachmentsUploaded(detail)}"
-          .endpointInfo="${{endpoint: '/api/v2/attachments/upload/'}}"
+          .endpointInfo="${{endpoint: this.uploadUrl}}"
         ></etools-upload-multi>
       </div>
     </etools-dialog>

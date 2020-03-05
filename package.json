@@ -1,7 +1,7 @@
 {
-  "name": "test-pkg-form-builder",
-  "description": "Test Pkg Form Builder components",
-  "version": "0.0.5",
+  "name": "etools-fm-form-builder",
+  "description": "Etools FM Form Builder components",
+  "version": "0.0.1",
   "contributors": [
     "eTools Team"
   ],
@@ -15,11 +15,9 @@
   "scripts": {
     "build": "tsc --skipLibCheck",
     "lint": "./node_modules/eslint/bin/eslint.js 'src/**'",
-    "prepare": "npm run build",
+    "prepare": "rm -rf ./dist && npm run build",
     "prepublishOnly": "npm run lint",
-    "preversion": "npm run lint",
-    "version": "npm run format && git add -A src",
-    "postversion": "git push && git push --tags"
+    "preversion": "npm run lint"
   },
   "dependencies": {
     "@polymer/paper-button": "^3.0.1",

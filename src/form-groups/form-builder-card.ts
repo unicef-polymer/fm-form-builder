@@ -1,17 +1,12 @@
-import {customElement, TemplateResult, html, property} from 'lit-element';
+import {TemplateResult, html, property} from 'lit-element';
 import {fireEvent} from '../lib/utils/fire-custom-event';
 import {clone, equals} from 'ramda';
 import {IFormBuilderCard} from '../lib/types/form-builder.interfaces';
 import {FormBuilderGroup} from './form-builder-group';
 import {GenericObject} from '../lib/types/global.types';
+import '@polymer/iron-collapse';
 
-@customElement('form-builder-card')
 export class FormBuilderCard extends FormBuilderGroup implements IFormBuilderCard {
-  /**
-   * Show save button only if value was changed by user
-   */
-  @property() private showSaveButton: boolean = false;
-
   /**
    * Overrides value property. Saves originalValue.
    * We need to update inner _value only if it wasn't change
@@ -26,8 +21,13 @@ export class FormBuilderCard extends FormBuilderGroup implements IFormBuilderCar
   get value(): GenericObject {
     return this._value;
   }
-  @property() private _value: GenericObject = {};
-  private originalValue: GenericObject = {};
+  @property() protected _value: GenericObject = {};
+  protected originalValue: GenericObject = {};
+
+  /**
+   * Show save button only if value was changed by user
+   */
+  @property() private showSaveButton: boolean = false;
 
   /**
    * Extends parent render method,

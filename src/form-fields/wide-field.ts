@@ -1,9 +1,8 @@
-import {html, customElement, TemplateResult, property} from 'lit-element';
+import {html, TemplateResult, property} from 'lit-element';
 import {BaseField} from './base-field';
 import '@polymer/paper-input/paper-textarea';
 import {InputStyles} from '../lib/styles/input-styles';
 
-@customElement('wide-field')
 export class WideField extends BaseField<string> {
   @property() label: string = '';
   @property() placeholder: string = '';

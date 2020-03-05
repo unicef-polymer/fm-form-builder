@@ -1,54 +1,45 @@
-import {css, CSSResultArray, customElement, LitElement, property, query, TemplateResult} from 'lit-element';
-import {template} from './checklist-attachments-popup.tpl';
-import {fireEvent} from '../../utils/fire-custom-event';
-import {AttachmentsStyles} from '../../styles/attachments.styles';
+import {css, CSSResultArray, LitElement, property, query, TemplateResult} from 'lit-element';
+import {GenericObject} from '../lib/types/global.types';
+import {BlueprintMetadata} from '../lib/types/form-builder.types';
 import {clone} from 'ramda';
-import {SharedStyles} from '../../styles/shared-styles';
-import {BlueprintMetadata} from '../../types/form-builder.types';
-import {GenericObject} from '../../types/global.types';
+import {template} from './form-attachments-popup.tpl';
+import {fireEvent} from '../lib/utils/fire-custom-event';
+import {SharedStyles} from '../lib/styles/shared-styles';
+import {AttachmentsStyles} from '../lib/styles/attachments.styles';
 
 export type FormBuilderAttachmentsPopupData = {
-  attachments: GenericObject[];
+  attachments: StoredAttachment[];
   metadata: BlueprintMetadata;
   title: string;
+  readonly?: boolean;
 };
 
 export type StoredAttachment = {
-  agreement_reference_number: string;
-  attachment: number;
-  created: string;
-  file_link: string;
-  file_type: string;
+  url?: string;
+  attachment?: number;
+  hash?: string;
   filename: string;
-  id: number;
-  object_link: string;
-  partner: string;
-  partner_type: string;
-  pd_ssfa: null;
-  pd_ssfa_number: string;
-  source: string;
-  uploaded_by: string;
-  vendor_number: string;
+  file_type: number | null;
 };
 
-@customElement('checklist-attachments-popup')
-export class ChecklistAttachmentsPopup extends LitElement {
+export abstract class FormAttachmentsPopup extends LitElement {
   @property() dialogOpened: boolean = true;
   @property() saveBtnClicked: boolean = false;
-  @property() savingInProcess: boolean = false;
-  @property() attachments: GenericObject[] = [];
-
+  @property() attachments: StoredAttachment[] = [];
   @property() metadata!: BlueprintMetadata;
   readonly: boolean = false;
   popupTitle: string = '';
 
   @query('#link') link!: HTMLLinkElement;
 
-  set dialogData({attachments, title, metadata}: FormBuilderAttachmentsPopupData) {
+  set dialogData({attachments, title, metadata, readonly}: FormBuilderAttachmentsPopupData) {
     this.popupTitle = title;
-    this.attachments = clone(attachments);
+    this.attachments = clone(attachments) || [];
     this.metadata = clone(metadata);
+    this.readonly = Boolean(readonly);
   }
+
+  abstract readonly uploadUrl: string;
 
   render(): TemplateResult | void {
     return template.call(this);
@@ -66,36 +57,11 @@ export class ChecklistAttachmentsPopup extends LitElement {
 
     fireEvent(this, 'response', {confirmed: true, attachments: this.attachments});
   }
-
-  protected attachmentsUploaded(attachments: {success: string[]; error: string[]}): void {
-    try {
-      const parsedAttachments: StoredAttachment[] = attachments.success.map((jsonAttachment: string) =>
-        JSON.parse(jsonAttachment)
-      );
-      this.attachments = [...this.attachments, ...parsedAttachments].map((item: GenericObject) => {
-        return {
-          attachment: `${item.attachment}`,
-          file_type: Number(item.file_type),
-          filename: item.filename,
-          url: item.url || item.file_link
-        };
-      });
-    } catch (e) {
-      console.error(e);
-      fireEvent(this, 'toast', {text: 'Can not upload attachments. Please try again later'});
-    }
-  }
-
   protected downloadFile(attachment: GenericObject): void {
     const url: string = attachment.url;
     this.link.href = url;
     this.link.click();
     window.URL.revokeObjectURL(url);
-  }
-
-  protected deleteAttachment(index: number): void {
-    this.attachments.splice(index, 1);
-    this.performUpdate();
   }
 
   protected changeFileType(attachment: GenericObject, newType: number | null): void {
@@ -104,6 +70,10 @@ export class ChecklistAttachmentsPopup extends LitElement {
       this.performUpdate();
     }
   }
+
+  protected abstract attachmentsUploaded(attachments: {success: string[]; error: string[]}): void;
+
+  protected abstract deleteAttachment(index: number): void;
 
   static get styles(): CSSResultArray {
     return [

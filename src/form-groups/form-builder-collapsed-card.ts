@@ -1,20 +1,21 @@
-import {customElement, TemplateResult, html, property} from 'lit-element';
+import {TemplateResult, html, property} from 'lit-element';
 import {clone} from 'ramda';
 import {fireEvent} from '../lib/utils/fire-custom-event';
 import {openDialog} from '../lib/utils/dialog';
 import {IFormBuilderCard, IFormBuilderCollapsedCard} from '../lib/types/form-builder.interfaces';
 import {FormBuilderGroup, StructureTypes} from './form-builder-group';
-import '../lib/additional-components/etools-card';
-import '../lib/additional-components/attachments-popup/checklist-attachments-popup';
+import '../lib/additional-components/etools-fb-card';
+import '../form-attachments-popup/form-attachments-popup.element';
 import {BlueprintField, BlueprintGroup} from '../lib/types/form-builder.types';
 import {GenericObject} from '../lib/types/global.types';
-import {FormBuilderAttachmentsPopupData} from '../lib/additional-components/attachments-popup/checklist-attachments-popup';
+import {FormBuilderAttachmentsPopupData} from '../form-attachments-popup';
 
 const PARTNER_KEY: string = 'partner';
 const OUTPUT_KEY: string = 'output';
 const INTERVENTION_KEY: string = 'intervention';
 
-@customElement('form-builder-collapsed-card')
+// TODO: Add Attachments popup error handling
+
 export class FormBuilderCollapsedCard extends FormBuilderGroup implements IFormBuilderCollapsedCard, IFormBuilderCard {
   /**
    * Overrides readonly property
@@ -27,8 +28,8 @@ export class FormBuilderCollapsedCard extends FormBuilderGroup implements IFormB
   get readonly(): boolean {
     return this._readonly || !this.isEditMode;
   }
-  @property() private isEditMode: boolean = false;
-  @property({type: Boolean, attribute: 'readonly', reflect: true}) private _readonly: boolean = true;
+  @property() protected isEditMode: boolean = false;
+  @property({type: Boolean, attribute: 'readonly', reflect: true}) protected _readonly: boolean = true;
 
   /**
    * Overrides errors setter
@@ -62,8 +63,8 @@ export class FormBuilderCollapsedCard extends FormBuilderGroup implements IFormB
   get value(): GenericObject {
     return this._value;
   }
-  @property() private _value: GenericObject = {};
-  private originalValue: GenericObject = {};
+  @property() protected _value: GenericObject = {};
+  protected originalValue: GenericObject = {};
 
   /**
    * Extends parent render method for handling additional types (StructureTypes.ATTACHMENTS_BUTTON in our case)
@@ -73,7 +74,7 @@ export class FormBuilderCollapsedCard extends FormBuilderGroup implements IFormB
     return html`
       ${this.renderInlineStyles()}
       <section class="elevation page-content card-container" elevation="1">
-        <etools-card
+        <etools-fb-card
           card-title="${this.retrieveTitle(this.parentGroupName) + ': ' + this.groupStructure.title}"
           is-collapsible
           ?is-editable="${!this._readonly}"
@@ -89,7 +90,7 @@ export class FormBuilderCollapsedCard extends FormBuilderGroup implements IFormB
           <div slot="content">
             ${this.renderGroupChildren()}
           </div>
-        </etools-card>
+        </etools-fb-card>
       </section>
     `;
   }
@@ -183,10 +184,13 @@ export class FormBuilderCollapsedCard extends FormBuilderGroup implements IFormB
    * In this case it will take only attachments changes and ignore other changes that may happen during card edit
    */
   openAttachmentsPopup(): void {
+    if (!customElements.get('form-attachments-popup')) {
+      throw new Error('Please define "form-attachments-popup" custom element!');
+    }
     openDialog<FormBuilderAttachmentsPopupData>({
-      dialog: 'checklist-attachments-popup',
+      dialog: 'form-attachments-popup',
       dialogData: {
-        attachments: this.value.attachments,
+        attachments: this.value?.attachments,
         metadata: this.metadata,
         title: `Attachments for ${this.retrieveTitle(this.parentGroupName) + ': ' + this.groupStructure.title}`
       },

@@ -327,5 +327,4 @@ export const InputStyles: TemplateResult = html`
       }
     </style>
   </custom-style>
- 
 `;

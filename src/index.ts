@@ -1,14 +1,19 @@
 /**
+ * Styles
+ */
+export * from './lib/styles/form-builder-card.styles';
+
+/**
  * Form group elements
  */
-export * from './form-groups/form-builder-group';
-export * from './form-groups/form-builder-card';
-export * from './form-groups/form-builder-collapsed-card';
+import './form-groups/custom-elements.define';
 /**
  * Form field elements
  */
+import './form-fields/custom-elements.define';
 export * from './form-fields/base-field';
-export * from './form-fields/text-field';
-export * from './form-fields/number-field';
-export * from './form-fields/scale-field';
-export * from './form-fields/wide-field';
+
+/**
+ * Attachments Popup
+ */
+import './form-attachments-popup/form-attachments-popup.element';

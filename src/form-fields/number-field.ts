@@ -1,8 +1,7 @@
-import {customElement, html, TemplateResult} from 'lit-element';
+import {html, TemplateResult} from 'lit-element';
 import {BaseField} from './base-field';
 import '@polymer/paper-input/paper-input';
 
-@customElement('number-field')
 export class NumberField extends BaseField<number> {
   protected controlTemplate(): TemplateResult {
     return html`

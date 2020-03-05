@@ -1,8 +1,7 @@
-import {html, customElement, TemplateResult} from 'lit-element';
+import {html, TemplateResult} from 'lit-element';
 import {BaseField} from './base-field';
 import '@polymer/paper-input/paper-textarea';
 
-@customElement('text-field')
 export class TextField extends BaseField<string> {
   protected controlTemplate(): TemplateResult {
     return html`
