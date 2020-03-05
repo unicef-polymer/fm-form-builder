@@ -1,5 +1,4 @@
 import {css, CSSResultArray, customElement, html, LitElement, property, TemplateResult} from 'lit-element';
-import {translate} from 'lit-translate';
 import '@polymer/iron-icons/iron-icons';
 import {CardStyles} from '../styles/card-styles';
 import {elevationStyles} from '../styles/elevation-styles';
@@ -182,10 +181,8 @@ export class EtoolsCard extends LitElement {
             ${this.isEditable && this.edit
               ? html`
                   <div class="layout horizontal end-justified card-buttons">
-                    <paper-button @tap="${() => this.cancel()}">${translate('MAIN.BUTTONS.CANCEL')}</paper-button>
-                    <paper-button class="save-button" @tap="${() => this.save()}"
-                      >${translate('MAIN.BUTTONS.SAVE')}</paper-button
-                    >
+                    <paper-button @tap="${() => this.cancel()}">Cancel</paper-button>
+                    <paper-button class="save-button" @tap="${() => this.save()}">Save</paper-button>
                   </div>
                 `
               : ''}

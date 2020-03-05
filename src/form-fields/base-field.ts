@@ -22,19 +22,6 @@ export abstract class BaseField<T> extends LitElement {
   protected render(): TemplateResult {
     return html`
       ${InputStyles}
-      <style>
-        paper-textarea {
-          --paper-input-container-input: {
-            font-size: 13px;
-          }
-        }
-        paper-input {
-          --paper-input-container-shared-input-style: {
-            font-size: 13px;
-            width: 100%;
-          }
-        }
-      </style>
 
       <div class="finding-container">
         <div class="question"><slot>${this.questionTemplate()}</slot></div>

@@ -1,5 +1,4 @@
 import {customElement, TemplateResult, html, property} from 'lit-element';
-import {translate} from 'lit-translate';
 import {fireEvent} from '../lib/utils/fire-custom-event';
 import {clone, equals} from 'ramda';
 import {IFormBuilderCard} from '../lib/types/form-builder.interfaces';
@@ -41,9 +40,7 @@ export class FormBuilderCard extends FormBuilderGroup implements IFormBuilderCar
 
         <iron-collapse ?opened="${this.showSaveButton}">
           <div class="layout horizontal end-justified card-buttons actions-container">
-            <paper-button class="save-button" @tap="${() => this.saveChanges()}"
-              >${translate('MAIN.BUTTONS.SAVE')}</paper-button
-            >
+            <paper-button class="save-button" @tap="${() => this.saveChanges()}">Save</paper-button>
           </div>
         </iron-collapse>
       </section>
@@ -55,6 +52,9 @@ export class FormBuilderCard extends FormBuilderGroup implements IFormBuilderCar
    * We need to fire value-changed event only after save button click
    */
   valueChanged(event: CustomEvent, name: string): void {
+    if (!this._value) {
+      this._value = {};
+    }
     this._value[name] = event.detail.value;
     event.stopPropagation();
     this.showSaveButton = !equals(this.value, this.originalValue);

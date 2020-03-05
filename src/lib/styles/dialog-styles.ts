@@ -14,7 +14,7 @@ export const DialogStyles: TemplateResult = html`
     }
 
     etools-dialog {
-      --etools-dialog-primary-color: var(--module-primary);
+      --etools-dialog-primary-color: var(--primary-color);
       --etools-dialog-scrollable: {
         margin-top: 0;
         padding-top: 12px !important;

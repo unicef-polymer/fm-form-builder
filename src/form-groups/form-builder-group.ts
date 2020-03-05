@@ -107,7 +107,7 @@ export class FormBuilderGroup extends LitElement implements IFormBuilderAbstract
       <wide-field
         ?is-readonly="${this.readonly}"
         ?required="${required}"
-        .value="${this.value[name]}"
+        .value="${this.value && this.value[name]}"
         label="${label}"
         placeholder="${placeholder}"
         .validators="${validations.map((validation: string) => this.metadata.validations[validation])}"
@@ -133,7 +133,7 @@ export class FormBuilderGroup extends LitElement implements IFormBuilderAbstract
           <text-field
             ?is-readonly="${this.readonly}"
             ?required="${required}"
-            .value="${this.value[name]}"
+            .value="${this.value && this.value[name]}"
             .validators="${validations.map((validation: string) => this.metadata.validations[validation])}"
             .errorMessage="${this.getErrorMessage(name)}"
             @value-changed="${(event: CustomEvent) => this.valueChanged(event, name)}"
@@ -149,7 +149,7 @@ export class FormBuilderGroup extends LitElement implements IFormBuilderAbstract
           <number-field
             ?is-readonly="${this.readonly}"
             ?required="${required}"
-            .value="${this.value[name]}"
+            .value="${this.value && this.value[name]}"
             .validators="${validations.map((validation: string) => this.metadata.validations[validation])}"
             .errorMessage="${this.getErrorMessage(name)}"
             @value-changed="${(event: CustomEvent) => this.valueChanged(event, name)}"
@@ -165,7 +165,7 @@ export class FormBuilderGroup extends LitElement implements IFormBuilderAbstract
             .options="${this.metadata.options[options_key || '']?.values || []}"
             ?is-readonly="${this.readonly}"
             ?required="${required}"
-            .value="${this.value[name]}"
+            .value="${this.value && this.value[name]}"
             .validators="${validations.map((validation: string) => this.metadata.validations[validation])}"
             .errorMessage="${this.getErrorMessage(name)}"
             @value-changed="${(event: CustomEvent) => this.valueChanged(event, name)}"
@@ -197,7 +197,7 @@ export class FormBuilderGroup extends LitElement implements IFormBuilderAbstract
       return html`
         <form-builder-group
           .groupStructure="${groupStructure}"
-          .value="${this.value[groupStructure.name]}"
+          .value="${this.value && this.value[groupStructure.name]}"
           .metadata="${this.metadata}"
           .parentGroupName="${this.groupStructure.name}"
           .readonly="${this.readonly}"
@@ -210,7 +210,7 @@ export class FormBuilderGroup extends LitElement implements IFormBuilderAbstract
       return html`
         <form-builder-collapsed-card
           .groupStructure="${groupStructure}"
-          .value="${this.value[groupStructure.name]}"
+          .value="${this.value && this.value[groupStructure.name]}"
           .metadata="${this.metadata}"
           .parentGroupName="${this.groupStructure.name}"
           .readonly="${this.readonly}"
@@ -223,7 +223,7 @@ export class FormBuilderGroup extends LitElement implements IFormBuilderAbstract
       return html`
         <form-builder-card
           .groupStructure="${groupStructure}"
-          .value="${this.value[groupStructure.name]}"
+          .value="${this.value && this.value[groupStructure.name]}"
           .metadata="${this.metadata}"
           .parentGroupName="${this.groupStructure.name}"
           .readonly="${this.readonly}"
@@ -239,6 +239,9 @@ export class FormBuilderGroup extends LitElement implements IFormBuilderAbstract
   }
 
   valueChanged(event: CustomEvent, name: string): void {
+    if (!this.value) {
+      this.value = {};
+    }
     this.value[name] = event.detail.value;
     event.stopPropagation();
     fireEvent(this, 'value-changed', {value: this.value});

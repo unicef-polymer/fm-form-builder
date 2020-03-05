@@ -1,7 +1,7 @@
 {
-  "name": "etools-fm-form-builder",
-  "description": "Etools FM Form Builder components",
-  "version": "0.0.1",
+  "name": "test-pkg-form-builder",
+  "description": "Test Pkg Form Builder components",
+  "version": "0.0.5",
   "contributors": [
     "eTools Team"
   ],
@@ -15,11 +15,11 @@
   "scripts": {
     "build": "tsc --skipLibCheck",
     "lint": "./node_modules/eslint/bin/eslint.js 'src/**'",
-    "prepare" : "npm run build",
-    "prepublishOnly" : "npm run lint",
-    "preversion" : "npm run lint",
-    "version" : "npm run format && git add -A src",
-    "postversion" : "git push && git push --tags"
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
   },
   "dependencies": {
     "@polymer/paper-button": "^3.0.1",
@@ -27,6 +27,7 @@
     "@polymer/paper-radio-button": "^3.0.1",
     "@polymer/paper-radio-group": "^3.0.1",
     "@polymer/iron-icons": "^3.0.1",
+    "@polymer/iron-collapse": "^3.0.1",
     "@unicef-polymer/etools-dialog": "^3.0.0",
     "@unicef-polymer/etools-dropdown": "^3.0.6",
     "@unicef-polymer/etools-upload": "^3.0.1",

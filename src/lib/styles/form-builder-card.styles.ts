@@ -12,7 +12,7 @@ export const FormBuilderCardStyles: CSSResult = css`
     /*border-bottom: none;*/
   }
   .attachments-button {
-    color: var(--module-primary);
+    color: var(--primary-color);
     font-weight: 500;
   }
   .attachments-button iron-icon {

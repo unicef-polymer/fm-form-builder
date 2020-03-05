@@ -150,6 +150,6 @@ export const CardStyles: CSSResult = css`
   a.link-cell {
     font-weight: 500;
     text-decoration: none;
-    color: var(--module-primary);
+    color: var(--primary-color);
   }
 `;

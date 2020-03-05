@@ -1,6 +1,5 @@
 import {customElement, TemplateResult, html, property} from 'lit-element';
 import {clone} from 'ramda';
-import {get, translate} from 'lit-translate';
 import {fireEvent} from '../lib/utils/fire-custom-event';
 import {openDialog} from '../lib/utils/dialog';
 import {IFormBuilderCard, IFormBuilderCollapsedCard} from '../lib/types/form-builder.interfaces';
@@ -8,7 +7,7 @@ import {FormBuilderGroup, StructureTypes} from './form-builder-group';
 import '../lib/additional-components/etools-card';
 import '../lib/additional-components/attachments-popup/checklist-attachments-popup';
 import {BlueprintField, BlueprintGroup} from '../lib/types/form-builder.types';
-import {Callback, GenericObject} from '../lib/types/global.types';
+import {GenericObject} from '../lib/types/global.types';
 import {FormBuilderAttachmentsPopupData} from '../lib/additional-components/attachments-popup/checklist-attachments-popup';
 
 const PARTNER_KEY: string = 'partner';
@@ -116,8 +115,8 @@ export class FormBuilderCollapsedCard extends FormBuilderGroup implements IFormB
     return showAttachmentsButton
       ? html`
           <paper-button @click="${() => this.openAttachmentsPopup()}" class="attachments-button">
-            <iron-icon icon="${this.value.attachments.length ? 'file-download' : 'file-upload'}"></iron-icon>
-            ${this.getAttachmentsBtnText(this.value.attachments.length)}
+            <iron-icon icon="${this.value?.attachments?.length ? 'file-download' : 'file-upload'}"></iron-icon>
+            ${this.getAttachmentsBtnText(this.value?.attachments?.length)}
           </paper-button>
         `
       : html``;
@@ -126,11 +125,11 @@ export class FormBuilderCollapsedCard extends FormBuilderGroup implements IFormB
   retrieveTitle(target: string): string {
     switch (target) {
       case PARTNER_KEY:
-        return `${get('LEVELS_OPTIONS.PARTNER')}`;
+        return `Partner`;
       case OUTPUT_KEY:
-        return `${get('LEVELS_OPTIONS.OUTPUT')}`;
+        return `Output`;
       case INTERVENTION_KEY:
-        return `${get('LEVELS_OPTIONS.INTERVENTION')}`;
+        return `PD/SSFA`;
       default:
         return '';
     }
@@ -161,6 +160,9 @@ export class FormBuilderCollapsedCard extends FormBuilderGroup implements IFormB
    */
   valueChanged(event: CustomEvent, name: string): void {
     event.stopPropagation();
+    if (!this._value) {
+      this._value = {};
+    }
     if (this._value[name] !== event.detail.value) {
       this._value[name] = event.detail.value;
     }
@@ -186,11 +188,7 @@ export class FormBuilderCollapsedCard extends FormBuilderGroup implements IFormB
       dialogData: {
         attachments: this.value.attachments,
         metadata: this.metadata,
-        title: `${get('ACTIVITY_ITEM.DATA_COLLECTION.ATTACHMENTS_POPUP_TITLE')} ${this.retrieveTitle(
-          this.parentGroupName
-        ) +
-          ': ' +
-          this.groupStructure.title}`
+        title: `Attachments for ${this.retrieveTitle(this.parentGroupName) + ': ' + this.groupStructure.title}`
       },
       readonly: this._readonly
     }).then((response: GenericObject) => {
@@ -208,13 +206,13 @@ export class FormBuilderCollapsedCard extends FormBuilderGroup implements IFormB
     });
   }
 
-  protected getAttachmentsBtnText(attachmentsCount: number): Callback {
+  protected getAttachmentsBtnText(attachmentsCount: number = 0): string {
     if (attachmentsCount === 1) {
-      return translate('ACTIVITY_ITEM.DATA_COLLECTION.ATTACHMENTS_BUTTON_TEXT.SINGLE', {count: attachmentsCount});
+      return `${attachmentsCount} File`;
     } else if (attachmentsCount > 1) {
-      return translate('ACTIVITY_ITEM.DATA_COLLECTION.ATTACHMENTS_BUTTON_TEXT.MULTIPLE', {count: attachmentsCount});
+      return `${attachmentsCount} Files`;
     } else {
-      return translate('ACTIVITY_ITEM.DATA_COLLECTION.ATTACHMENTS_BUTTON_TEXT.DEFAULT');
+      return 'Upload Files';
     }
   }
 }

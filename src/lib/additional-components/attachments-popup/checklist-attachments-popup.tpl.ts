@@ -7,7 +7,6 @@ import '@unicef-polymer/etools-dialog/etools-dialog';
 import '@unicef-polymer/etools-dropdown/etools-dropdown';
 import '@polymer/paper-button/paper-button';
 import '@polymer/iron-icons/iron-icons';
-import {translate} from 'lit-translate';
 import {GenericObject} from '../../types/global.types';
 
 export function template(this: ChecklistAttachmentsPopup): TemplateResult {
@@ -15,7 +14,7 @@ export function template(this: ChecklistAttachmentsPopup): TemplateResult {
     ${InputStyles} ${DialogStyles}
     <style>
       etools-dialog {
-        --etools-dialog-primary-color: var(--module-primary);
+        --etools-dialog-primary-color: var(--primary-color);
         --etools-dialog-scrollable: {
           margin-top: 0;
           padding-top: 12px !important;
@@ -39,7 +38,7 @@ export function template(this: ChecklistAttachmentsPopup): TemplateResult {
       no-padding
       keep-dialog-open
       ?opened="${this.dialogOpened}"
-      .okBtnText="${translate('MAIN.BUTTONS.SAVE')}"
+      .okBtnText="Save"
       .hideConfirmBtn="${this.readonly}"
       dialog-title="${this.popupTitle}"
       @close="${this.onClose}"
@@ -58,8 +57,8 @@ export function template(this: ChecklistAttachmentsPopup): TemplateResult {
                 @etools-selected-item-changed="${({detail}: CustomEvent) =>
                   this.changeFileType(attachment, detail.selectedItem?.value)}"
                 trigger-value-change-event
-                label="${translate('ATTACHMENTS_LIST.FILE_TYPE_LABEL')}"
-                placeholder="${translate('ATTACHMENTS_LIST.FILE_TYPE_PLACEHOLDER')}"
+                label="Document Type"
+                placeholder="Select Document Type"
                 required
                 ?readonly="${this.readonly}"
                 ?disabled="${this.readonly}"
