@@ -9,7 +9,7 @@ export const InputStyles: TemplateResult = html`
       }
 
       .file-link iron-icon {
-        color: var(--dark-icon-color);
+        color: var(--dark-icon-color, rgba(0, 0, 0, 0.65));
       }
 
       .file-link a {
@@ -20,7 +20,7 @@ export const InputStyles: TemplateResult = html`
       }
 
       a.link-button {
-        color: var(--primary-color);
+        color: var(--primary-color, #0099ff);
         font-weight: 500;
         cursor: pointer;
       }
@@ -32,7 +32,7 @@ export const InputStyles: TemplateResult = html`
       paper-input,
       datepicker-lite {
         padding: 0 12px;
-        color: var(--gray-mid);
+        color: var(--gray-mid, rgba(0, 0, 0, 0.54));
         box-sizing: border-box;
 
         --paper-input-container-shared-input-style: {
@@ -52,7 +52,7 @@ export const InputStyles: TemplateResult = html`
 
         --paper-input-prefix: {
           margin-right: 10px;
-          color: var(--gray-mid);
+          color: var(--gray-mid, rgba(0, 0, 0, 0.54));
         }
 
         --paper-input-error: {
@@ -65,9 +65,9 @@ export const InputStyles: TemplateResult = html`
           font-size: 13px;
           white-space: normal;
         }
-        --paper-input-container-focus-color: var(--primary-color);
+        --paper-input-container-focus-color: var(--primary-color, #0099ff);
         --iron-autogrow-textarea-placeholder: {
-          color: var(--gray-20) !important;
+          color: var(--gray-20, rgba(0, 0, 0, 0.2)) !important;
         }
         --iron-autogrow-textarea: {
           padding: 0;
@@ -82,26 +82,26 @@ export const InputStyles: TemplateResult = html`
       etools-currency-amount-input,
       datepicker-lite {
         outline: none !important;
-        --esmm-placeholder-color: var(--gray-20);
-        --esmm-multi-placeholder-color: var(--gray-20);
-        --paper-input-container-color: var(--gray-20);
-        --paper-input-container-focus-color: var(--primary-color);
+        --esmm-placeholder-color: var(--gray-20, rgba(0, 0, 0, 0.2));
+        --esmm-multi-placeholder-color: var(--gray-20, rgba(0, 0, 0, 0.2));
+        --paper-input-container-color: var(--gray-20, rgba(0, 0, 0, 0.2));
+        --paper-input-container-focus-color: var(--primary-color, #0099ff);
         --paper-input-container-input: {
           font-size: 13px;
-          color: var(--gray-dark);
+          color: var(--gray-dark, rgba(0, 0, 0, 0.87));
         }
         --paper-input-container-label: {
-          color: var(--gray-50);
+          color: var(--gray-50, rgba(0, 0, 0, 0.5));
         }
 
-        --paper-input-container-invalid-color: var(--module-error);
+        --paper-input-container-invalid-color: var(--module-error, #ea4022);
 
         --paper-input-container-disabled: {
-          color: var(--gray-light);
+          color: var(--gray-light, rgba(0, 0, 0, 0.38));
           opacity: 1;
         }
         --paper-input-char-counter: {
-          color: var(--gray-light);
+          color: var(--gray-light, rgba(0, 0, 0, 0.38));
         }
 
         --paper-input-container-label-floating: {
@@ -133,16 +133,16 @@ export const InputStyles: TemplateResult = html`
       etools-dropdown.no-data-fetched,
       etools-dropdown-multi.no-data-fetched,
       paper-input.no-data-fetched {
-        --esmm-placeholder-color: var(--gray-dark);
-        --paper-input-container-color: var(--gray-dark);
+        --esmm-placeholder-color: var(--gray-dark, rgba(0, 0, 0, 0.87));
+        --paper-input-container-color: var(--gray-dark, rgba(0, 0, 0, 0.87));
       }
 
       etools-currency-amount-input {
         --etools-currency-container-label: {
-          color: var(--gray-50);
+          color: var(--gray-50, rgba(0, 0, 0, 0.5));
         }
-        --paper-input-container-color: var(--gray-20);
-        --paper-input-container-focus-color: var(--primary-color);
+        --paper-input-container-color: var(--gray-20, rgba(0, 0, 0, 0.2));
+        --paper-input-container-focus-color: var(--primary-color, #0099ff);
       }
 
       etools-dropdown-multi[readonly]:not(.datepicker),
@@ -175,7 +175,7 @@ export const InputStyles: TemplateResult = html`
       paper-input[disabled].without-border,
       datepicker-lite[disabled].without-border {
         --paper-input-container-label: {
-          color: var(--gray-50) !important;
+          color: var(--gray-50, rgba(0, 0, 0, 0.5)) !important;
         }
         --esmm-placeholder-color: rgba(0, 0, 0, 0.16) !important;
         --esmm-multi-placeholder-color: rgba(0, 0, 0, 0.16) !important;
@@ -193,9 +193,9 @@ export const InputStyles: TemplateResult = html`
           display: none;
         }
         --iron-autogrow-textarea-placeholder: {
-          color: var(--gray-mid-dark) !important;
+          color: var(--gray-mid-dark, rgba(0, 0, 0, 0.7)) !important;
         }
-        --paper-input-container-color: var(--gray-mid-dark);
+        --paper-input-container-color: var(--gray-mid-dark, rgba(0, 0, 0, 0.7));
       }
 
       etools-dropdown-multi.required:not([disabled]),
@@ -214,23 +214,25 @@ export const InputStyles: TemplateResult = html`
       paper-input[required].readonly-required,
       paper-input[required]:not([disabled]) {
         --paper-input-container-label: {
-          background: url('/fm/assets/images/required.svg') no-repeat 98% 14%/7px;
+          background: url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%221235%22%20height%3D%221175%22%3E%3Cpath%20fill%3D%22%23de0000%22%20d%3D%22M0%2C449h1235l-999%2C726%20382-1175%20382%2C1175z%22%2F%3E%3C%2Fsvg%3E')
+            no-repeat 98% 14%/7px;
           width: auto !important;
           max-width: 90%;
           right: auto;
           padding-right: 15px;
-          color: var(--gray-50);
+          color: var(--gray-50, rgba(0, 0, 0, 0.5));
         }
       }
 
       etools-currency-amount-input.required:not([disabled]) {
         --etools-currency-container-label: {
-          background: url('/fm/assets/images/required.svg') no-repeat 98% 14%/7px;
+          background: url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%221235%22%20height%3D%221175%22%3E%3Cpath%20fill%3D%22%23de0000%22%20d%3D%22M0%2C449h1235l-999%2C726%20382-1175%20382%2C1175z%22%2F%3E%3C%2Fsvg%3E')
+            no-repeat 98% 14%/7px;
           width: auto !important;
           max-width: 90%;
           right: auto;
           padding-right: 15px;
-          color: var(--gray-50);
+          color: var(--gray-50, rgba(0, 0, 0, 0.5));
         }
       }
 
@@ -268,11 +270,11 @@ export const InputStyles: TemplateResult = html`
           border-bottom: 1px dashed rgba(0, 0, 0, 0.2) !important;
         }
         --etools-currency-container-label: {
-          color: var(--gray-50);
+          color: var(--gray-50, rgba(0, 0, 0, 0.5));
         }
         --paper-input-container: {
           opacity: 1 !important;
-          color: var(--gray-dark) !important;
+          color: var(--gray-dark, rgba(0, 0, 0, 0.87)) !important;
         }
       }
 
@@ -317,7 +319,7 @@ export const InputStyles: TemplateResult = html`
       }
 
       .text-control label {
-        color: var(--gray-mid);
+        color: var(--gray-mid, rgba(0, 0, 0, 0.54));
         font-size: var(--paper-font-caption_-_font-size);
         font-weight: var(--paper-font-caption_-_font-weight);
       }

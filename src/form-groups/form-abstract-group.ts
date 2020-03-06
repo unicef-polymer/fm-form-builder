@@ -36,7 +36,7 @@ export enum StructureTypes {
   ATTACHMENTS_BUTTON = 'floating_attachments'
 }
 
-export class FormBuilderGroup extends LitElement implements IFormBuilderAbstractGroup {
+export class FormAbstractGroup extends LitElement implements IFormBuilderAbstractGroup {
   @property({type: Object}) groupStructure!: BlueprintGroup;
   @property({type: Object}) metadata!: BlueprintMetadata;
   @property({type: String}) parentGroupName: string = '';
@@ -206,7 +206,7 @@ export class FormBuilderGroup extends LitElement implements IFormBuilderAbstract
     const isCollapsed: boolean = groupStructure.styling.includes(StructureTypes.COLLAPSED);
     if (isAbstract) {
       return html`
-        <form-builder-group
+        <form-abstract-group
           .groupStructure="${groupStructure}"
           .value="${this.value && this.value[groupStructure.name]}"
           .metadata="${this.metadata}"
@@ -215,11 +215,11 @@ export class FormBuilderGroup extends LitElement implements IFormBuilderAbstract
           .errors="${this._errors[groupStructure.name] || null}"
           @value-changed="${(event: CustomEvent) => this.valueChanged(event, groupStructure.name)}"
           @error-changed="${(event: CustomEvent) => this.errorChanged(event, groupStructure.name)}"
-        ></form-builder-group>
+        ></form-abstract-group>
       `;
     } else if (isCard && isCollapsed) {
       return html`
-        <form-builder-collapsed-card
+        <form-collapsed-card
           .groupStructure="${groupStructure}"
           .value="${this.value && this.value[groupStructure.name]}"
           .metadata="${this.metadata}"
@@ -228,11 +228,11 @@ export class FormBuilderGroup extends LitElement implements IFormBuilderAbstract
           .errors="${this._errors[groupStructure.name] || null}"
           @value-changed="${(event: CustomEvent) => this.valueChanged(event, groupStructure.name)}"
           @error-changed="${(event: CustomEvent) => this.errorChanged(event, groupStructure.name)}"
-        ></form-builder-collapsed-card>
+        ></form-collapsed-card>
       `;
     } else if (isCard) {
       return html`
-        <form-builder-card
+        <form-card
           .groupStructure="${groupStructure}"
           .value="${this.value && this.value[groupStructure.name]}"
           .metadata="${this.metadata}"
@@ -241,7 +241,7 @@ export class FormBuilderGroup extends LitElement implements IFormBuilderAbstract
           .errors="${this._errors[groupStructure.name] || null}"
           @value-changed="${(event: CustomEvent) => this.valueChanged(event, groupStructure.name)}"
           @error-changed="${(event: CustomEvent) => this.errorChanged(event, groupStructure.name)}"
-        ></form-builder-card>
+        ></form-card>
       `;
     } else {
       console.warn(`FormBuilderGroup: Unknown group type: ${groupStructure.styling}`);

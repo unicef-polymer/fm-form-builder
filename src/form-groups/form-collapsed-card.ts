@@ -3,7 +3,7 @@ import {clone} from 'ramda';
 import {fireEvent} from '../lib/utils/fire-custom-event';
 import {openDialog} from '../lib/utils/dialog';
 import {IFormBuilderCard, IFormBuilderCollapsedCard} from '../lib/types/form-builder.interfaces';
-import {FormBuilderGroup, StructureTypes} from './form-builder-group';
+import {FormAbstractGroup, StructureTypes} from './form-abstract-group';
 import '../lib/additional-components/etools-fb-card';
 import '../form-attachments-popup/form-attachments-popup.element';
 import {BlueprintField, BlueprintGroup} from '../lib/types/form-builder.types';
@@ -16,7 +16,7 @@ const INTERVENTION_KEY: string = 'intervention';
 
 // TODO: Add Attachments popup error handling
 
-export class FormBuilderCollapsedCard extends FormBuilderGroup implements IFormBuilderCollapsedCard, IFormBuilderCard {
+export class FormCollapsedCard extends FormAbstractGroup implements IFormBuilderCollapsedCard, IFormBuilderCard {
   /**
    * Overrides readonly property
    * In collapsed card it must consider isEditMode property,

@@ -1,3 +1,3 @@
-export * from './form-builder-group';
-export * from './form-builder-card';
-export * from './form-builder-collapsed-card';
+export * from './form-abstract-group';
+export * from './form-card';
+export * from './form-collapsed-card';

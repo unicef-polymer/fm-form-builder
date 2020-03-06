@@ -2,11 +2,11 @@ import {TemplateResult, html, property} from 'lit-element';
 import {fireEvent} from '../lib/utils/fire-custom-event';
 import {clone, equals} from 'ramda';
 import {IFormBuilderCard} from '../lib/types/form-builder.interfaces';
-import {FormBuilderGroup} from './form-builder-group';
+import {FormAbstractGroup} from './form-abstract-group';
 import {GenericObject} from '../lib/types/global.types';
 import '@polymer/iron-collapse';
 
-export class FormBuilderCard extends FormBuilderGroup implements IFormBuilderCard {
+export class FormCard extends FormAbstractGroup implements IFormBuilderCard {
   /**
    * Overrides value property. Saves originalValue.
    * We need to update inner _value only if it wasn't change
