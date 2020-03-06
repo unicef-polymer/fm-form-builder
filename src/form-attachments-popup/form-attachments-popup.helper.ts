@@ -22,7 +22,7 @@ export type AttachmentFromEtoolsUpload = {
   vendor_number: string;
 };
 
-class FormAttachmentsPopupHelper {
+export class FormAttachmentsPopupHelper {
   get isInitialized(): boolean {
     return Boolean(this.uploadUrl);
   }
