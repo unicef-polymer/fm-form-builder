@@ -199,6 +199,10 @@ export class FormCollapsedCard extends FormAbstractGroup implements IFormBuilder
       if (!response.confirmed) {
         return;
       }
+      if (!this._value) {
+        this._value = {};
+      }
+
       this._value.attachments = response.attachments;
       if (this.isEditMode) {
         const tmp: GenericObject = clone(this.originalValue);
