@@ -41,6 +41,7 @@ export class FormAbstractGroup extends LitElement implements IFormBuilderAbstrac
   @property({type: Object}) metadata!: BlueprintMetadata;
   @property({type: String}) parentGroupName: string = '';
   @property({type: Boolean, attribute: 'readonly', reflect: true}) readonly: boolean = true;
+  computedPath: string[] = [];
 
   /**
    * Make value property immutable
@@ -211,6 +212,7 @@ export class FormAbstractGroup extends LitElement implements IFormBuilderAbstrac
           .value="${this.value && this.value[groupStructure.name]}"
           .metadata="${this.metadata}"
           .parentGroupName="${this.groupStructure.name}"
+          .computedPath="${this.computedPath.concat([this.groupStructure.name])}"
           .readonly="${this.readonly}"
           .errors="${this._errors[groupStructure.name] || null}"
           @value-changed="${(event: CustomEvent) => this.valueChanged(event, groupStructure.name)}"
@@ -224,6 +226,7 @@ export class FormAbstractGroup extends LitElement implements IFormBuilderAbstrac
           .value="${this.value && this.value[groupStructure.name]}"
           .metadata="${this.metadata}"
           .parentGroupName="${this.groupStructure.name}"
+          .computedPath="${this.computedPath.concat([this.groupStructure.name])}"
           .readonly="${this.readonly}"
           .errors="${this._errors[groupStructure.name] || null}"
           @value-changed="${(event: CustomEvent) => this.valueChanged(event, groupStructure.name)}"
@@ -237,6 +240,7 @@ export class FormAbstractGroup extends LitElement implements IFormBuilderAbstrac
           .value="${this.value && this.value[groupStructure.name]}"
           .metadata="${this.metadata}"
           .parentGroupName="${this.groupStructure.name}"
+          .computedPath="${this.computedPath.concat([this.groupStructure.name])}"
           .readonly="${this.readonly}"
           .errors="${this._errors[groupStructure.name] || null}"
           @value-changed="${(event: CustomEvent) => this.valueChanged(event, groupStructure.name)}"

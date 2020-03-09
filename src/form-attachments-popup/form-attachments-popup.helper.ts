@@ -1,6 +1,6 @@
 import {StoredAttachment} from './form-attachments-popup.base';
 
-export type AttachmentUploadMiddleware = (uploadedData: any[]) => Promise<StoredAttachment[]>;
+export type AttachmentUploadMiddleware = (uploadedData: any[], path: string[]) => Promise<StoredAttachment[]>;
 export type AttachmentDeleteMiddleware = (attachment: StoredAttachment) => void;
 export type AttachmentGetMiddleware = (attachment: StoredAttachment) => Promise<StoredAttachment>;
 
@@ -88,8 +88,8 @@ export class FormAttachmentsPopupHelper {
     this.getMiddleware = onGet || FormAttachmentsPopupHelper.DEFAULT_GET_MIDDLEWARE;
   }
 
-  applyUploadMiddleware(data: any[]): Promise<StoredAttachment[]> {
-    return this.uploadMiddleware(data);
+  applyUploadMiddleware(data: any[], path: string[]): Promise<StoredAttachment[]> {
+    return this.uploadMiddleware(data, path);
   }
 
   applyDeleteMiddleware(data: StoredAttachment): void {

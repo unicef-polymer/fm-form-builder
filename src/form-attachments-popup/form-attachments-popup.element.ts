@@ -18,7 +18,10 @@ export class FormAttachmentsPopupElement extends FormAttachmentsPopup {
 
   protected async attachmentsUploaded(attachments: {success: string[]; error: string[]}): Promise<void> {
     try {
-      const parsedAttachments: StoredAttachment[] = await AttachmentsHelper.applyUploadMiddleware(attachments.success);
+      const parsedAttachments: StoredAttachment[] = await AttachmentsHelper.applyUploadMiddleware(
+        attachments.success,
+        this.computedPath
+      );
       this.attachments = [...this.attachments, ...parsedAttachments];
     } catch (e) {
       console.error(e);

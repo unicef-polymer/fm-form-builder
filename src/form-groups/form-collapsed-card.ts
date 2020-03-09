@@ -192,7 +192,8 @@ export class FormCollapsedCard extends FormAbstractGroup implements IFormBuilder
       dialogData: {
         attachments: this.value?.attachments,
         metadata: this.metadata,
-        title: `Attachments for ${this.retrieveTitle(this.parentGroupName) + ': ' + this.groupStructure.title}`
+        title: `Attachments for ${this.retrieveTitle(this.parentGroupName) + ': ' + this.groupStructure.title}`,
+        computedPath: this.computedPath.concat([this.groupStructure.name, 'attachments'])
       },
       readonly: this._readonly
     }).then((response: GenericObject) => {
