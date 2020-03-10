@@ -6,6 +6,7 @@ import {template} from './form-attachments-popup.tpl';
 import {fireEvent} from '../lib/utils/fire-custom-event';
 import {SharedStyles} from '../lib/styles/shared-styles';
 import {AttachmentsStyles} from '../lib/styles/attachments.styles';
+import {AttachmentFromEtoolsUpload, AttachmentsHelper} from './form-attachments-popup.helper';
 
 export type FormBuilderAttachmentsPopupData = {
   attachments: StoredAttachment[];
@@ -23,7 +24,7 @@ export type StoredAttachment = {
   file_type: number | null;
 };
 
-export abstract class FormAttachmentsPopup extends LitElement {
+export class FormAttachmentsPopup extends LitElement {
   @property() dialogOpened: boolean = true;
   @property() saveBtnClicked: boolean = false;
   @property() attachments: StoredAttachment[] = [];
@@ -42,7 +43,16 @@ export abstract class FormAttachmentsPopup extends LitElement {
     this.computedPath = computedPath;
   }
 
-  abstract readonly uploadUrl: string;
+  get uploadUrl(): string {
+    return AttachmentsHelper.uploadUrl!;
+  }
+
+  constructor() {
+    super();
+    if (!AttachmentsHelper.isInitialized) {
+      throw new Error('Please initialize attachments popup before use');
+    }
+  }
 
   render(): TemplateResult | void {
     return template.call(this);
@@ -74,9 +84,38 @@ export abstract class FormAttachmentsPopup extends LitElement {
     }
   }
 
-  protected abstract attachmentsUploaded(attachments: {success: string[]; error: string[]}): void;
+  protected attachmentsUploaded(attachments: {success: string[]; error: string[]}): void {
+    try {
+      const parsedAttachments: StoredAttachment[] = attachments.success
+        .map((data: any) => (typeof data === 'string' ? JSON.parse(data) : data))
+        .map((data: AttachmentFromEtoolsUpload) => {
+          const {file_link, attachment, filename} = data;
+          if (!file_link || !attachment || !filename) {
+            console.warn('Missing fields in parsed attachment');
+            return null;
+          } else {
+            return {
+              url: file_link,
+              attachment,
+              filename,
+              file_type: null
+            } as StoredAttachment;
+          }
+        })
+        .filter<StoredAttachment>((attachment: StoredAttachment | null): attachment is StoredAttachment =>
+          Boolean(attachment)
+        );
+      this.attachments = [...this.attachments, ...parsedAttachments];
+    } catch (e) {
+      console.error(e);
+      fireEvent(this, 'toast', {text: 'Can not upload attachments. Please try again later'});
+    }
+  }
 
-  protected abstract deleteAttachment(index: number): void;
+  protected deleteAttachment(index: number): void {
+    this.attachments.splice(index, 1);
+    this.performUpdate();
+  }
 
   static get styles(): CSSResultArray {
     return [

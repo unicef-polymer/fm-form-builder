@@ -16,4 +16,5 @@ export * from './form-fields/base-field';
 /**
  * Attachments Popup
  */
-import './form-attachments-popup/form-attachments-popup.element';
+import {FormAttachmentsPopup} from './form-attachments-popup';
+window.customElements.define('form-attachments-popup', FormAttachmentsPopup);
