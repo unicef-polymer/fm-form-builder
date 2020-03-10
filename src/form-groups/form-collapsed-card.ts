@@ -5,7 +5,6 @@ import {openDialog} from '../lib/utils/dialog';
 import {IFormBuilderCard, IFormBuilderCollapsedCard} from '../lib/types/form-builder.interfaces';
 import {FormAbstractGroup, StructureTypes} from './form-abstract-group';
 import '../lib/additional-components/etools-fb-card';
-import '../form-attachments-popup/form-attachments-popup.element';
 import {BlueprintField, BlueprintGroup} from '../lib/types/form-builder.types';
 import {GenericObject} from '../lib/types/global.types';
 import {FormBuilderAttachmentsPopupData} from '../form-attachments-popup';
