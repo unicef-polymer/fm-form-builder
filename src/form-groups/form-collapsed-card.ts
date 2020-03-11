@@ -114,6 +114,7 @@ export class FormCollapsedCard extends FormAbstractGroup implements IFormBuilder
     );
     return showAttachmentsButton
       ? html`
+          <iron-icon icon="warning" class="attachments-warning" ?hidden="${!this._errors.attachments}"></iron-icon>
           <paper-button @click="${() => this.openAttachmentsPopup()}" class="attachments-button">
             <iron-icon icon="${this.value?.attachments?.length ? 'file-download' : 'file-upload'}"></iron-icon>
             ${this.getAttachmentsBtnText(this.value?.attachments?.length)}
@@ -192,7 +193,8 @@ export class FormCollapsedCard extends FormAbstractGroup implements IFormBuilder
         attachments: this.value?.attachments,
         metadata: this.metadata,
         title: `Attachments for ${this.retrieveTitle(this.parentGroupName) + ': ' + this.groupStructure.title}`,
-        computedPath: this.computedPath.concat([this.groupStructure.name, 'attachments'])
+        computedPath: this.computedPath.concat([this.groupStructure.name, 'attachments']),
+        errors: this._errors.attachments
       },
       readonly: this._readonly
     }).then((response: GenericObject) => {

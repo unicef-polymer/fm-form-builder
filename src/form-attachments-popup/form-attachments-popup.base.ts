@@ -14,6 +14,7 @@ export type FormBuilderAttachmentsPopupData = {
   title: string;
   readonly?: boolean;
   computedPath: string[];
+  errors: GenericObject[];
 };
 
 export type StoredAttachment = {
@@ -32,15 +33,17 @@ export class FormAttachmentsPopup extends LitElement {
   readonly: boolean = false;
   popupTitle: string = '';
   computedPath: string[] = [];
+  errors: GenericObject = [];
 
   @query('#link') link!: HTMLLinkElement;
 
-  set dialogData({attachments, title, metadata, readonly, computedPath}: FormBuilderAttachmentsPopupData) {
+  set dialogData({attachments, title, metadata, readonly, computedPath, errors}: FormBuilderAttachmentsPopupData) {
     this.popupTitle = title;
     this.attachments = clone(attachments) || [];
     this.metadata = clone(metadata);
     this.readonly = Boolean(readonly);
     this.computedPath = computedPath;
+    this.errors = clone(errors) || [];
   }
 
   get uploadUrl(): string {

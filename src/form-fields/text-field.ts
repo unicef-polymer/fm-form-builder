@@ -1,17 +1,12 @@
-import {html, TemplateResult} from 'lit-element';
+import {css, CSSResultArray, html, TemplateResult} from 'lit-element';
 import {BaseField} from './base-field';
 import '@polymer/paper-input/paper-textarea';
+import {FlexLayoutClasses} from '../lib/styles/flex-layout-classes';
+import {BaseFieldStyles} from '../lib/styles/base-field.styles';
 
 export class TextField extends BaseField<string> {
   protected controlTemplate(): TemplateResult {
     return html`
-      <style>
-        @media (max-width: 380px) {
-          .no-padding-left {
-            padding-left: 0;
-          }
-        }
-      </style>
       <paper-textarea
         id="textarea"
         class="without-border no-padding-left"
@@ -29,5 +24,20 @@ export class TextField extends BaseField<string> {
 
   protected customValidation(): string | null {
     return null;
+  }
+
+  static get styles(): CSSResultArray {
+    // language=CSS
+    return [
+      FlexLayoutClasses,
+      BaseFieldStyles,
+      css`
+        @media (max-width: 380px) {
+          .no-padding-left {
+            padding-left: 0;
+          }
+        }
+      `
+    ];
   }
 }

@@ -1,5 +1,5 @@
 {
-  "name": "@unicef-polymer/etools-form-builder",
+  "name": "test-form-builder",
   "description": "Etools FM Form Builder components",
   "version": "0.1.3",
   "contributors": [
@@ -20,22 +20,22 @@
     "preversion": "npm run lint"
   },
   "dependencies": {
+    "@polymer/iron-collapse": "^3.0.1",
+    "@polymer/iron-icons": "^3.0.1",
     "@polymer/paper-button": "^3.0.1",
     "@polymer/paper-input": "^3.0.2",
     "@polymer/paper-radio-button": "^3.0.1",
     "@polymer/paper-radio-group": "^3.0.1",
-    "@polymer/iron-icons": "^3.0.1",
-    "@polymer/iron-collapse": "^3.0.1",
+    "@polymer/paper-toast": "^3.0.1",
+    "@types/ramda": "^0.26.19",
     "@unicef-polymer/etools-dialog": "^3.0.0",
     "@unicef-polymer/etools-dropdown": "^3.0.6",
     "@unicef-polymer/etools-upload": "^3.0.1",
     "@webcomponents/webcomponentsjs": "^2.3.0",
-    "@types/ramda": "^0.26.19",
-    "ramda": "^0.26.1",
     "lit-element": "^2.2.1",
     "lit-translate": "^1.1.20",
-    "web-animations-js": "^2.3.2",
-    "@polymer/paper-toast": "^3.0.1"
+    "ramda": "^0.26.1",
+    "web-animations-js": "^2.3.2"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.6.0",
