@@ -1,6 +1,5 @@
 import {FormAttachmentsPopup} from './form-attachments-popup.base';
 import {html, TemplateResult} from 'lit-html';
-import {InputStyles} from '../lib/styles/input-styles';
 import {DialogStyles} from '../lib/styles/dialog-styles';
 import '@unicef-polymer/etools-upload/etools-upload-multi';
 import '@unicef-polymer/etools-dialog/etools-dialog';
@@ -11,7 +10,7 @@ import {GenericObject} from '../lib/types/global.types';
 
 export function template(this: FormAttachmentsPopup): TemplateResult {
   return html`
-    ${InputStyles} ${DialogStyles}
+    ${DialogStyles}
     <style>
       etools-dialog {
         --etools-dialog-primary-color: var(--primary-color);

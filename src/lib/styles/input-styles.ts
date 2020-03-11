@@ -1,90 +1,21 @@
-import {html, TemplateResult} from 'lit-element';
 // language=HTML
-export const InputStyles: TemplateResult = html`
+const InputStyles: string = `
   <custom-style>
     <style>
-      paper-icon-button[hidden] {
-        display: inline-block !important;
-        visibility: hidden;
-      }
-
-      .file-link iron-icon {
-        color: var(--dark-icon-color, rgba(0, 0, 0, 0.65));
-      }
-
-      .file-link a {
-        padding-left: 5px;
-        color: var(--accent-color);
-        text-decoration: none;
-        font-weight: 500;
-      }
-
-      a.link-button {
-        color: var(--primary-color, #0099ff);
-        font-weight: 500;
-        cursor: pointer;
-      }
-
-      etools-dropdown,
-      etools-dropdown-multi,
-      paper-dropdown-menu,
-      paper-textarea,
-      paper-input,
-      datepicker-lite {
+      etools-dropdown.form-control,
+      etools-dropdown-multi.form-control,
+      paper-input.form-control,
+      paper-textarea.form-control,
+      paper-dropdown-menu.form-control,
+      etools-currency-amount-input.form-control,
+      datepicker-lite.form-control {
+        outline: none !important;
         padding: 0 12px;
         color: var(--gray-mid, rgba(0, 0, 0, 0.54));
         box-sizing: border-box;
-
-        --paper-input-container-shared-input-style: {
-          font-size: 13px;
-          width: 100%;
-        }
-
-        --paper-input-container-input: {
-          display: block !important;
-          font-size: 13px;
-          box-sizing: border-box;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          padding-right: 3px;
-        }
-
-        --paper-input-prefix: {
-          margin-right: 10px;
-          color: var(--gray-mid, rgba(0, 0, 0, 0.54));
-        }
-
-        --paper-input-error: {
-          overflow: hidden;
-        }
-      }
-
-      paper-textarea {
-        --paper-input-container-input: {
-          font-size: 13px;
-          white-space: normal;
-        }
-        --paper-input-container-focus-color: var(--primary-color, #0099ff);
-        --iron-autogrow-textarea-placeholder: {
-          color: var(--gray-20, rgba(0, 0, 0, 0.2)) !important;
-        }
-        --iron-autogrow-textarea: {
-          padding: 0;
-        }
-      }
-
-      etools-dropdown,
-      etools-dropdown-multi,
-      paper-input,
-      paper-textarea,
-      paper-dropdown-menu,
-      etools-currency-amount-input,
-      datepicker-lite {
-        outline: none !important;
         --esmm-placeholder-color: var(--gray-20, rgba(0, 0, 0, 0.2));
         --esmm-multi-placeholder-color: var(--gray-20, rgba(0, 0, 0, 0.2));
-        --paper-input-container-color: var(--gray-20, rgba(0, 0, 0, 0.2));
+        --paper-input-container-color: rgba(0, 0, 0, 0.2);
         --paper-input-container-focus-color: var(--primary-color, #0099ff);
         --paper-input-container-input: {
           font-size: 13px;
@@ -128,52 +59,56 @@ export const InputStyles: TemplateResult = html`
         --paper-input-container-underline: {
           border-color: rgba(0, 0, 0, 0.2) !important;
         }
-      }
 
-      etools-dropdown.no-data-fetched,
-      etools-dropdown-multi.no-data-fetched,
-      paper-input.no-data-fetched {
-        --esmm-placeholder-color: var(--gray-dark, rgba(0, 0, 0, 0.87));
-        --paper-input-container-color: var(--gray-dark, rgba(0, 0, 0, 0.87));
-      }
 
-      etools-currency-amount-input {
-        --etools-currency-container-label: {
-          color: var(--gray-50, rgba(0, 0, 0, 0.5));
+        --paper-input-container-shared-input-style: {
+          font-size: 13px;
+          width: 100%;
         }
-        --paper-input-container-color: var(--gray-20, rgba(0, 0, 0, 0.2));
-        --paper-input-container-focus-color: var(--primary-color, #0099ff);
+
+        --paper-input-prefix: {
+          margin-right: 10px;
+          color: var(--gray-mid, rgba(0, 0, 0, 0.54));
+        }
+
+        --paper-input-error: {
+          overflow: hidden;
+        }
+
+        --iron-autogrow-textarea-placeholder: {
+          color: var(--gray-20, rgba(0, 0, 0, 0.2)) !important;
+        }
+        --iron-autogrow-textarea: {
+          padding: 0;
+        }
       }
 
-      etools-dropdown-multi[readonly]:not(.datepicker),
-      etools-dropdown-multi[disabled].disabled-as-readonly,
-      etools-dropdown[readonly]:not(.datepicker),
-      etools-dropdown[disabled].disabled-as-readonly,
-      paper-textarea[readonly]:not(.datepicker),
-      paper-textarea[disabled].disabled-as-readonly,
-      paper-dropdown-menu[readonly]:not(.datepicker),
-      paper-dropdown-menu[disabled].disabled-as-readonly,
-      paper-input[readonly]:not(.datepicker),
-      paper-input[disabled].disabled-as-readonly. datepicker-lite[readonly],
-      datepicker-lite[disabled].disabled-as-readonly {
+
+      paper-input-container.form-control,
+      etools-dropdown-multi[disabled].disabled-as-readonly.form-control,
+      etools-dropdown[disabled].disabled-as-readonly.form-control,
+      paper-textarea[disabled].disabled-as-readonly.form-control,
+      paper-dropdown-menu[disabled].disabled-as-readonly.form-control,
+      paper-input[disabled].disabled-as-readonly.form-control,
+      datepicker-lite[disabled].disabled-as-readonly.form-control {
         --paper-input-container: {
           opacity: 1 !important;
         }
         --paper-input-container-underline: {
-          border-bottom: 1px dashed rgba(0, 0, 0, 0.2) !important;
-          border-color: rgba(0, 0, 0, 0.2) !important;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.2) !important;
           display: block !important;
         }
         --paper-input-container-underline-focus: {
           display: none;
         }
+        --paper-input-container-color: rgba(0, 0, 0, 0.2) !important;
       }
 
-      etools-dropdown-multi[disabled].without-border,
-      etools-dropdown[disabled].without-border,
-      paper-textarea[disabled].without-border,
-      paper-input[disabled].without-border,
-      datepicker-lite[disabled].without-border {
+      etools-dropdown-multi[disabled].without-border.form-control,
+      etools-dropdown[disabled].without-border.form-control,
+      paper-textarea[disabled].without-border.form-control,
+      paper-input[disabled].without-border.form-control,
+      datepicker-lite[disabled].without-border.form-control {
         --paper-input-container-label: {
           color: var(--gray-50, rgba(0, 0, 0, 0.5)) !important;
         }
@@ -198,135 +133,34 @@ export const InputStyles: TemplateResult = html`
         --paper-input-container-color: var(--gray-mid-dark, rgba(0, 0, 0, 0.7));
       }
 
-      etools-dropdown-multi.required:not([disabled]),
-      etools-dropdown-multi[required]:not([disabled]),
-      etools-dropdown-multi[required].readonly-required,
-      etools-dropdown.required:not([disabled]),
-      etools-dropdown[required]:not([disabled]),
-      etools-dropdown[required].readonly-required,
-      paper-dropdown-menu.required:not([disabled]),
-      paper-dropdown-menu[required]:not([disabled]),
-      paper-dropdown-menu[required].readonly-required,
-      paper-textarea.required:not([disabled]),
-      paper-textarea[required]:not([disabled]),
-      paper-textarea[required].readonly-required,
-      paper-input.required:not([disabled]),
-      paper-input[required].readonly-required,
-      paper-input[required]:not([disabled]) {
+      etools-dropdown-multi.required:not([disabled]).form-control,
+      etools-dropdown-multi[required]:not([disabled]).form-control,
+      etools-dropdown-multi[required].readonly-required.form-control,
+      etools-dropdown.required:not([disabled]).form-control,
+      etools-dropdown[required]:not([disabled]).form-control,
+      etools-dropdown[required].readonly-required.form-control,
+      paper-dropdown-menu.required:not([disabled]).form-control,
+      paper-dropdown-menu[required]:not([disabled]).form-control,
+      paper-dropdown-menu[required].readonly-required.form-control,
+      paper-textarea.required:not([disabled]).form-control,
+      paper-textarea[required]:not([disabled]).form-control,
+      paper-textarea[required].readonly-required.form-control,
+      paper-input.required:not([disabled]).form-control,
+      paper-input[required].readonly-required.form-control,
+      paper-input[required]:not([disabled]).form-control {
         --paper-input-container-label: {
-          background: url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%221235%22%20height%3D%221175%22%3E%3Cpath%20fill%3D%22%23de0000%22%20d%3D%22M0%2C449h1235l-999%2C726%20382-1175%20382%2C1175z%22%2F%3E%3C%2Fsvg%3E')
-            no-repeat 98% 14%/7px;
+          background: url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%221235%22%20height%3D%221175%22%3E%3Cpath%20fill%3D%22%23de0000%22%20d%3D%22M0%2C449h1235l-999%2C726%20382-1175%20382%2C1175z%22%2F%3E%3C%2Fsvg%3E') no-repeat 98% 14%/7px;
           width: auto !important;
-          max-width: 90%;
+          max-width: max-content;
           right: auto;
           padding-right: 15px;
           color: var(--gray-50, rgba(0, 0, 0, 0.5));
         }
-      }
-
-      etools-currency-amount-input.required:not([disabled]) {
-        --etools-currency-container-label: {
-          background: url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%221235%22%20height%3D%221175%22%3E%3Cpath%20fill%3D%22%23de0000%22%20d%3D%22M0%2C449h1235l-999%2C726%20382-1175%20382%2C1175z%22%2F%3E%3C%2Fsvg%3E')
-            no-repeat 98% 14%/7px;
-          width: auto !important;
-          max-width: 90%;
-          right: auto;
-          padding-right: 15px;
-          color: var(--gray-50, rgba(0, 0, 0, 0.5));
-        }
-      }
-
-      etools-dropdown-multi.bold,
-      etools-dropdown.bold,
-      paper-input.bold {
-        --paper-input-container-input: {
-          font-size: 13px;
-          font-weight: 500;
-        }
-
-        --paper-input-container-underline-focus: {
-          display: none !important;
-        }
-
-        --paper-input-container-underline-disabled: {
-          display: none !important;
-        }
-
-        --paper-input-container-underline: {
-          display: none !important;
-        }
-      }
-
-      etools-dropdown-multi.deleted,
-      etools-dropdown.deleted,
-      paper-input.deleted {
-        --paper-input-container-input: {
-          color: #b0b0b0;
-        }
-      }
-
-      etools-currency-amount-input[disabled].disabled-as-readonly {
-        --etools-currency-container-underline-disabled: {
-          border-bottom: 1px dashed rgba(0, 0, 0, 0.2) !important;
-        }
-        --etools-currency-container-label: {
-          color: var(--gray-50, rgba(0, 0, 0, 0.5));
-        }
-        --paper-input-container: {
-          opacity: 1 !important;
-          color: var(--gray-dark, rgba(0, 0, 0, 0.87)) !important;
-        }
-      }
-
-      etools-dropdown.readonly,
-      etools-dropdown-multi.readonly,
-      paper-input.readonly,
-      paper-dropdown-menu.readonly,
-      paper-textarea.readonly {
-        --paper-input-container-underline: {
-          display: none !important;
-        }
-      }
-
-      etools-checkable-input {
-        --etools-checkable-input-label: {
-          font-size: 16px;
-          font-weight: 400;
-          line-height: 21px;
-        }
-      }
-
-      etools-currency-amount-input {
-        padding: 0 12px;
-        box-sizing: border-box;
-      }
-
-      etools-content-panel:not([list]) {
-        --ecp-content: {
-          padding: 8px 12px;
-          padding-left: 12px;
-        }
-      }
-
-      etools-currency-amount-input {
-        --etools-currency-container-input: {
-          line-height: 0;
-        }
-      }
-
-      .text-control {
-        padding: 14px;
-      }
-
-      .text-control label {
-        color: var(--gray-mid, rgba(0, 0, 0, 0.54));
-        font-size: var(--paper-font-caption_-_font-size);
-        font-weight: var(--paper-font-caption_-_font-weight);
-      }
-
-      .text-control .value {
-        padding-bottom: 3px;
       }
     </style>
   </custom-style>
 `;
+
+const documentContainer: HTMLTemplateElement = document.createElement('template');
+documentContainer.innerHTML = InputStyles;
+document.head.appendChild(documentContainer.content);

@@ -14,7 +14,7 @@ export class TextField extends BaseField<string> {
       </style>
       <paper-textarea
         id="textarea"
-        class="without-border no-padding-left"
+        class="no-padding-left form-control"
         no-label-float
         .value="${this.value}"
         @value-changed="${({detail}: CustomEvent) => this.valueChanged(detail.value)}"

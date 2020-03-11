@@ -10,7 +10,6 @@ import {elevationStyles} from '../lib/styles/elevation-styles';
 import {CardStyles} from '../lib/styles/card-styles';
 import {FlexLayoutClasses} from '../lib/styles/flex-layout-classes';
 import {FormBuilderCardStyles} from '..';
-import {InputStyles} from '../lib/styles/input-styles';
 import {fireEvent} from '../lib/utils/fire-custom-event';
 import {IFormBuilderAbstractGroup} from '../lib/types/form-builder.interfaces';
 import {BlueprintField, BlueprintGroup, BlueprintMetadata} from '../lib/types/form-builder.types';
@@ -78,7 +77,6 @@ export class FormAbstractGroup extends LitElement implements IFormBuilderAbstrac
     }
 
     return html`
-      ${this.renderInlineStyles()}
       ${this.groupStructure.children.map((child: BlueprintGroup | BlueprintField) => this.renderChild(child))}
     `;
   }
@@ -273,10 +271,6 @@ export class FormAbstractGroup extends LitElement implements IFormBuilderAbstrac
     event.stopPropagation();
     const errors: GenericObject | null = Object.keys(this._errors).length ? this._errors : null;
     fireEvent(this, 'error-changed', {error: errors});
-  }
-
-  renderInlineStyles(): TemplateResult {
-    return InputStyles;
   }
 
   protected getErrorMessage(fieldName: string): string | null {

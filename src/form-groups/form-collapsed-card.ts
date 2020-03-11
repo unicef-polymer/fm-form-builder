@@ -71,7 +71,6 @@ export class FormCollapsedCard extends FormAbstractGroup implements IFormBuilder
    */
   render(): TemplateResult {
     return html`
-      ${this.renderInlineStyles()}
       <section class="elevation page-content card-container" elevation="1">
         <etools-fb-card
           card-title="${this.retrieveTitle(this.parentGroupName) + ': ' + this.groupStructure.title}"

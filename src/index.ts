@@ -2,6 +2,7 @@
  * Styles
  */
 export * from './lib/styles/form-builder-card.styles';
+import './lib/styles/input-styles';
 
 /**
  * Form group elements

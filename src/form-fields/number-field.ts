@@ -13,7 +13,7 @@ export class NumberField extends BaseField<number> {
         }
       </style>
       <paper-input
-        class="without-border no-padding-left"
+        class="without-border no-padding-left form-control"
         no-label-float
         .value="${this.value}"
         @value-changed="${({detail}: CustomEvent) => this.valueChanged(detail.value)}"
