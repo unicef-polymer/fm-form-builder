@@ -1,4 +1,4 @@
-import {FormAttachmentsPopup} from './form-attachments-popup.base';
+import {FormAttachmentsPopup} from './form-attachments-popup';
 import {html, TemplateResult} from 'lit-html';
 import {DialogStyles} from '../lib/styles/dialog-styles';
 import '@unicef-polymer/etools-upload/etools-upload-multi';
@@ -80,6 +80,7 @@ export function template(this: FormAttachmentsPopup): TemplateResult {
 
               <!--         Download Button         -->
               <paper-button
+                ?hidden="${!attachment.url}"
                 class="download-button file-selector__download"
                 @tap="${() => this.downloadFile(attachment)}"
               >
@@ -102,6 +103,7 @@ export function template(this: FormAttachmentsPopup): TemplateResult {
         <!--     Upload button     -->
         <etools-upload-multi
           class="with-padding"
+          activate-offline
           ?hidden="${this.readonly}"
           @upload-finished="${({detail}: CustomEvent) => this.attachmentsUploaded(detail)}"
           .endpointInfo="${{endpoint: this.uploadUrl}}"
