@@ -1,7 +1,7 @@
 import {css, CSSResultArray, LitElement, property, query, TemplateResult} from 'lit-element';
 import {GenericObject} from '../lib/types/global.types';
 import {BlueprintMetadata} from '../lib/types/form-builder.types';
-import {clone} from 'ramda';
+import {clone, equals} from 'ramda';
 import {template} from './form-attachments-popup.tpl';
 import {fireEvent} from '../lib/utils/fire-custom-event';
 import {SharedStyles} from '../lib/styles/shared-styles';
@@ -15,6 +15,7 @@ export type FormBuilderAttachmentsPopupData = {
   title: string;
   readonly?: boolean;
   computedPath: string[];
+  errors: GenericObject[];
 };
 
 export type StoredAttachment = {
@@ -57,6 +58,7 @@ export class FormAttachmentsPopup extends LitElement {
   readonly: boolean = false;
   popupTitle: string = '';
   computedPath: string[] = [];
+  errors: GenericObject = [];
 
   @query('#link') link!: HTMLLinkElement;
 
@@ -65,15 +67,16 @@ export class FormAttachmentsPopup extends LitElement {
    * We need to remove them from IDB but only after confirm button click
    */
   private filesForRemove: string[] = [];
-  private originalAttachments: (string | number)[] = [];
+  private originalAttachments: StoredAttachment[] = [];
 
-  set dialogData({attachments, title, metadata, readonly, computedPath}: FormBuilderAttachmentsPopupData) {
+  set dialogData({attachments, title, metadata, readonly, computedPath, errors}: FormBuilderAttachmentsPopupData) {
     this.popupTitle = title;
     this.attachments = clone(attachments) || [];
-    this.originalAttachments = (attachments || []).map(({attachment}: StoredAttachment) => attachment);
+    this.originalAttachments = clone(attachments) || [];
     this.metadata = clone(metadata);
     this.readonly = Boolean(readonly);
     this.computedPath = computedPath;
+    this.errors = clone(errors) || [];
   }
 
   get uploadUrl(): string {
@@ -97,7 +100,9 @@ export class FormAttachmentsPopup extends LitElement {
    */
   onClose(): void {
     this.attachments.forEach(({url, attachment}: StoredAttachment) => {
-      const existsInOriginal: boolean = this.originalAttachments.includes(attachment);
+      const existsInOriginal: boolean = this.originalAttachments
+        .map((item: StoredAttachment) => item.attachment || [])
+        .includes(attachment);
       if (!existsInOriginal && !url) {
         deleteFileFromDexie(attachment as string);
       }
@@ -106,7 +111,16 @@ export class FormAttachmentsPopup extends LitElement {
   }
 
   saveChanges(): void {
-    const fileTypeNotSelected: boolean = this.attachments.some((attachment: GenericObject) => !attachment.file_type);
+    let fileTypeNotSelected: boolean = false;
+    this.attachments.forEach((attachment: GenericObject, index: number) => {
+      if (!attachment.file_type) {
+        fileTypeNotSelected = true;
+        this.errors[index] = {file_type: ['This field is required']};
+      } else {
+        this.errors[index] = [];
+      }
+    });
+    this.performUpdate();
     if (fileTypeNotSelected) {
       return;
     }
@@ -118,16 +132,19 @@ export class FormAttachmentsPopup extends LitElement {
     /**
      * Don't confirm popup if no changes was made
      */
-    const isDataEquals: boolean =
-      this.attachments.every(
-        ({attachment}: StoredAttachment, index: number) => this.originalAttachments[index] === attachment
-      ) && this.attachments.length === this.originalAttachments.length;
-
-    if (!isDataEquals) {
+    if (!equals(this.attachments, this.originalAttachments)) {
       fireEvent(this, 'response', {confirmed: true, attachments: this.attachments});
     } else {
       fireEvent(this, 'response', {confirmed: false});
     }
+  }
+
+  checkFileType(index: number): boolean {
+    return this.errors[index]?.file_type;
+  }
+
+  retrieveErrorMessage(index: number): string {
+    return this.errors[index] && this.errors[index].file_type ? this.errors[index].file_type[0] : '';
   }
 
   protected downloadFile(attachment: GenericObject): void {
@@ -208,6 +225,7 @@ export class FormAttachmentsPopup extends LitElement {
   }
 
   static get styles(): CSSResultArray {
+    // language=CSS
     return [
       SharedStyles,
       AttachmentsStyles,
