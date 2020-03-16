@@ -1,17 +1,10 @@
-import {html, TemplateResult} from 'lit-element';
+import {css, CSSResultArray, html, TemplateResult} from 'lit-element';
 import {BaseField} from './base-field';
 import '@polymer/paper-input/paper-input';
 
 export class NumberField extends BaseField<number> {
   protected controlTemplate(): TemplateResult {
     return html`
-      <style>
-        @media (max-width: 380px) {
-          .no-padding-left {
-            padding-left: 0;
-          }
-        }
-      </style>
       <paper-input
         class="without-border no-padding-left form-control"
         no-label-float
@@ -34,5 +27,19 @@ export class NumberField extends BaseField<number> {
 
   protected customValidation(value: number): string | null {
     return value && isNaN(value) ? 'Must be a number' : null;
+  }
+
+  static get styles(): CSSResultArray {
+    // language=CSS
+    return [
+      ...BaseField.styles,
+      css`
+        @media (max-width: 380px) {
+          .no-padding-left {
+            padding-left: 0;
+          }
+        }
+      `
+    ];
   }
 }

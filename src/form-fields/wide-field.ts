@@ -1,4 +1,4 @@
-import {html, TemplateResult, property} from 'lit-element';
+import {html, TemplateResult, property, CSSResultArray} from 'lit-element';
 import {BaseField} from './base-field';
 import '@polymer/paper-input/paper-textarea';
 
@@ -29,5 +29,10 @@ export class WideField extends BaseField<string> {
 
   protected customValidation(): string | null {
     return null;
+  }
+
+  static get styles(): CSSResultArray {
+    // language=CSS
+    return [...BaseField.styles];
   }
 }

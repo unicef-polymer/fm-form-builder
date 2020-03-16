@@ -214,6 +214,8 @@ export class FormAttachmentsPopup extends LitElement {
       css`
         .file-selector__type-dropdown {
           flex-basis: 25%;
+          padding-left: 8px;
+          padding-right: 8px;
         }
         .file-selector__filename {
           flex-basis: 35%;

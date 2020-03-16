@@ -318,6 +318,10 @@ export class FormAbstractGroup extends LitElement implements IFormBuilderAbstrac
         .card-container.form-card {
           padding: 12px 0 15px;
         }
+
+        .attachments-warning {
+          color: red;
+        }
       `
     ];
   }

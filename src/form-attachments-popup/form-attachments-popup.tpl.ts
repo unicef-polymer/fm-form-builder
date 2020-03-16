@@ -11,26 +11,6 @@ import {GenericObject} from '../lib/types/global.types';
 export function template(this: FormAttachmentsPopup): TemplateResult {
   return html`
     ${DialogStyles}
-    <style>
-      etools-dialog {
-        --etools-dialog-primary-color: var(--primary-color);
-        --etools-dialog-scrollable: {
-          margin-top: 0;
-          padding-top: 12px !important;
-        }
-        --etools-dialog-content: {
-          min-height: 80px;
-          padding-bottom: 8px !important;
-          padding-top: 0px !important;
-        }
-        --etools-dialog-button-styles: {
-          margin-top: 0;
-        }
-        --etools-dialog-title: {
-          padding: 8px 45px 8px 24px;
-        }
-      }
-    </style>
     <etools-dialog
       id="dialog"
       size="md"
