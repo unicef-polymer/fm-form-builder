@@ -1,6 +1,5 @@
 import {FormAttachmentsPopup} from './form-attachments-popup';
 import {html, TemplateResult} from 'lit-html';
-import {DialogStyles} from '../lib/styles/dialog-styles';
 import '@unicef-polymer/etools-upload/etools-upload-multi';
 import '@unicef-polymer/etools-dialog/etools-dialog';
 import '@unicef-polymer/etools-dropdown/etools-dropdown';
@@ -10,9 +9,8 @@ import {GenericObject} from '../lib/types/global.types';
 
 export function template(this: FormAttachmentsPopup): TemplateResult {
   return html`
-    ${DialogStyles}
     <etools-dialog
-      id="dialog"
+      id="form-attachments-dialog"
       size="md"
       no-padding
       keep-dialog-open

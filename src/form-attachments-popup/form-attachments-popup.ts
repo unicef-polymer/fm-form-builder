@@ -208,6 +208,7 @@ export class FormAttachmentsPopup extends LitElement {
   }
 
   static get styles(): CSSResultArray {
+    // language=CSS
     return [
       SharedStyles,
       AttachmentsStyles,
