@@ -24,7 +24,7 @@ export function template(this: FormAttachmentsPopup): TemplateResult {
       <!--  Link is used to download attachments  -->
       <a id="link" target="_blank" hidden></a>
 
-      <div>
+      <div class="popup-container">
         ${this.attachments?.map(
           (attachment: GenericObject, index: number) => html`
             <div class="file-selector-container with-type-dropdown">

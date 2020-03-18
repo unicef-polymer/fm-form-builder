@@ -230,6 +230,9 @@ export class FormAttachmentsPopup extends LitElement {
         .file-selector-container.with-type-dropdown {
           flex-wrap: nowrap;
         }
+        .popup-container {
+          padding: 12px 12px 0;
+        }
         @media (max-width: 380px) {
           .file-selector-container.with-type-dropdown {
             justify-content: center;
