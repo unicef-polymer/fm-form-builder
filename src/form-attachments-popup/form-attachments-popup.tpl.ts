@@ -26,14 +26,14 @@ export function template(this: FormAttachmentsPopup): TemplateResult {
 
       <div class="popup-container">
         ${this.attachments?.map(
-          (attachment: GenericObject, index: number) => html`
+    (attachment: GenericObject, index: number) => html`
             <div class="file-selector-container with-type-dropdown">
               <!--        Type select Dropdown        -->
               <etools-dropdown
                 class="type-dropdown disabled-as-readonly file-selector__type-dropdown"
                 .selected="${attachment.file_type}"
                 @etools-selected-item-changed="${({detail}: CustomEvent) =>
-                  this.changeFileType(attachment, detail.selectedItem?.value)}"
+        this.changeFileType(attachment, detail.selectedItem?.value)}"
                 trigger-value-change-event
                 label="Document Type"
                 placeholder="Select Document Type"
@@ -76,7 +76,7 @@ export function template(this: FormAttachmentsPopup): TemplateResult {
               </paper-button>
             </div>
           `
-        )}
+  )}
 
         <!--     Upload button     -->
         <etools-upload-multi
@@ -85,6 +85,7 @@ export function template(this: FormAttachmentsPopup): TemplateResult {
           ?hidden="${this.readonly}"
           @upload-finished="${({detail}: CustomEvent) => this.attachmentsUploaded(detail)}"
           .endpointInfo="${{endpoint: this.uploadUrl}}"
+          .jwtLocalStorageKey="${this.jwtLocalStorageKey}"
         ></etools-upload-multi>
       </div>
     </etools-dialog>

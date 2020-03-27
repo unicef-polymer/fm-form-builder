@@ -80,6 +80,10 @@ export class FormAttachmentsPopup extends LitElement {
     return AttachmentsHelper.uploadUrl!;
   }
 
+  get jwtLocalStorageKey(): string {
+    return AttachmentsHelper.jwtLocalStorageKey!;
+  }
+
   constructor() {
     super();
     if (!AttachmentsHelper.isInitialized) {

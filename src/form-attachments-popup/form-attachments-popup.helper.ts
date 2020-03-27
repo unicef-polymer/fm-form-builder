@@ -3,9 +3,11 @@ export class FormAttachmentsPopupHelper {
     return Boolean(this.uploadUrl);
   }
   uploadUrl: string | null = null;
+  jwtLocalStorageKey?: string;
 
-  initialize(uploadUrl: string): void {
+  initialize(uploadUrl: string, jwtLocalStorageKey?: string): void {
     this.uploadUrl = uploadUrl;
+    this.jwtLocalStorageKey = jwtLocalStorageKey;
   }
 }
 
