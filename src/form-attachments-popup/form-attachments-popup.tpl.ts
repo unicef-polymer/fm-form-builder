@@ -85,7 +85,9 @@ export function template(this: FormAttachmentsPopup): TemplateResult {
           ?hidden="${this.readonly}"
           @upload-finished="${({detail}: CustomEvent) => this.attachmentsUploaded(detail)}"
           .endpointInfo="${{endpoint: this.uploadUrl}}"
-        ></etools-upload-multi>
+          .jwtLocalStorageKey="${this.jwtLocalStorageKey}"
+        >
+        </etools-upload-multi>
       </div>
     </etools-dialog>
   `;
