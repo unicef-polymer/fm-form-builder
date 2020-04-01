@@ -6,9 +6,12 @@ import '@unicef-polymer/etools-dropdown/etools-dropdown';
 import '@polymer/paper-button/paper-button';
 import '@polymer/iron-icons/iron-icons';
 import {GenericObject} from '../lib/types/global.types';
+import {InputStyles} from '../lib/styles/input-styles';
+import {DialogStyles} from '../lib/styles/dialog.styles';
 
 export function template(this: FormAttachmentsPopup): TemplateResult {
   return html`
+    ${InputStyles} ${DialogStyles}
     <etools-dialog
       id="form-attachments-dialog"
       size="md"

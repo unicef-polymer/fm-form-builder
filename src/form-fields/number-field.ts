@@ -1,10 +1,12 @@
 import {css, CSSResultArray, html, TemplateResult} from 'lit-element';
 import {BaseField} from './base-field';
 import '@polymer/paper-input/paper-input';
+import {InputStyles} from '../lib/styles/input-styles';
 
 export class NumberField extends BaseField<number> {
   protected controlTemplate(): TemplateResult {
     return html`
+      ${InputStyles}
       <paper-input
         class="without-border no-padding-left form-control"
         no-label-float

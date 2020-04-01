@@ -1,10 +1,12 @@
 import {css, CSSResultArray, html, TemplateResult} from 'lit-element';
 import {BaseField} from './base-field';
 import '@polymer/paper-input/paper-textarea';
+import {InputStyles} from '../lib/styles/input-styles';
 
 export class TextField extends BaseField<string> {
   protected controlTemplate(): TemplateResult {
     return html`
+      ${InputStyles}
       <paper-textarea
         id="textarea"
         class="no-padding-left form-control"

@@ -4,6 +4,7 @@ import {repeat} from 'lit-html/directives/repeat';
 import '@polymer/paper-radio-group/paper-radio-group';
 import '@polymer/paper-radio-button/paper-radio-button';
 import {PaperRadioButtonElement} from '@polymer/paper-radio-button/paper-radio-button';
+import {InputStyles} from '../lib/styles/input-styles';
 
 export type FieldOption = {
   value: any;
@@ -14,6 +15,7 @@ export class ScaleField extends BaseField<string | null> {
   @property({type: Array}) options: FieldOption[] = [];
   protected controlTemplate(): TemplateResult {
     return html`
+      ${InputStyles}
       <div class="container">
         <paper-radio-group
           class="radio-group"

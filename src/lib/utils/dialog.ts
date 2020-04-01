@@ -1,4 +1,3 @@
-import '../styles/dialog.styles';
 // you need to fire 'response' event on dialog close!
 export interface IDialog<D> {
   dialog: string;
