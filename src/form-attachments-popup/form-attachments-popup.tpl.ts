@@ -47,8 +47,8 @@ export function template(this: FormAttachmentsPopup): TemplateResult {
                 .options="${this.metadata?.options.target_attachments_file_types?.values}"
                 option-label="label"
                 option-value="value"
-                ?invalid="${!attachment.file_type && this.saveBtnClicked}"
-                .errorMessage="File Type is required"
+                ?invalid="${this.checkFileType(index)}"
+                .errorMessage="${this.retrieveErrorMessage(index)}"
                 allow-outside-scroll
                 dynamic-align
               ></etools-dropdown>
