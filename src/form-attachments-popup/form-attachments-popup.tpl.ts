@@ -36,7 +36,7 @@ export function template(this: FormAttachmentsPopup): TemplateResult {
                 class="type-dropdown disabled-as-readonly file-selector__type-dropdown"
                 .selected="${attachment.file_type}"
                 @etools-selected-item-changed="${({detail}: CustomEvent) =>
-                  this.changeFileType(attachment, detail.selectedItem?.value)}"
+                  this.changeFileType(attachment, detail.selectedItem?.value, index)}"
                 trigger-value-change-event
                 label="Document Type"
                 placeholder="Select Document Type"

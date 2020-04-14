@@ -158,9 +158,10 @@ export class FormAttachmentsPopup extends LitElement {
     window.URL.revokeObjectURL(url);
   }
 
-  protected changeFileType(attachment: GenericObject, newType: number | null): void {
+  protected changeFileType(attachment: GenericObject, newType: number | null, index: number): void {
     if (newType && attachment.file_type !== newType) {
       attachment.file_type = newType;
+      this.errors[index] = [];
       this.performUpdate();
     }
   }
