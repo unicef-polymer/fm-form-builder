@@ -36,7 +36,7 @@ export function template(this: FormAttachmentsPopup): TemplateResult {
                 class="type-dropdown disabled-as-readonly file-selector__type-dropdown"
                 .selected="${attachment.file_type}"
                 @etools-selected-item-changed="${({detail}: CustomEvent) =>
-                  this.changeFileType(attachment, detail.selectedItem?.value)}"
+                  this.changeFileType(attachment, detail.selectedItem?.value, index)}"
                 trigger-value-change-event
                 label="Document Type"
                 placeholder="Select Document Type"
@@ -47,8 +47,8 @@ export function template(this: FormAttachmentsPopup): TemplateResult {
                 .options="${this.metadata?.options.target_attachments_file_types?.values}"
                 option-label="label"
                 option-value="value"
-                ?invalid="${!attachment.file_type && this.saveBtnClicked}"
-                .errorMessage="File Type is required"
+                ?invalid="${this.checkFileType(index)}"
+                .errorMessage="${this.retrieveErrorMessage(index)}"
                 allow-outside-scroll
                 dynamic-align
               ></etools-dropdown>

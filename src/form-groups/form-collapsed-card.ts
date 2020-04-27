@@ -13,8 +13,6 @@ const PARTNER_KEY: string = 'partner';
 const OUTPUT_KEY: string = 'output';
 const INTERVENTION_KEY: string = 'intervention';
 
-// TODO: Add Attachments popup error handling
-
 export class FormCollapsedCard extends FormAbstractGroup implements IFormBuilderCollapsedCard, IFormBuilderCard {
   /**
    * Overrides readonly property
@@ -113,6 +111,7 @@ export class FormCollapsedCard extends FormAbstractGroup implements IFormBuilder
     );
     return showAttachmentsButton
       ? html`
+          <iron-icon icon="warning" class="attachments-warning" ?hidden="${!this._errors.attachments}"></iron-icon>
           <paper-button @click="${() => this.openAttachmentsPopup()}" class="attachments-button">
             <iron-icon icon="${this.value?.attachments?.length ? 'file-download' : 'file-upload'}"></iron-icon>
             ${this.getAttachmentsBtnText(this.value?.attachments?.length)}
@@ -191,7 +190,8 @@ export class FormCollapsedCard extends FormAbstractGroup implements IFormBuilder
         attachments: this.value?.attachments,
         metadata: this.metadata,
         title: `Attachments for ${this.retrieveTitle(this.parentGroupName) + ': ' + this.groupStructure.title}`,
-        computedPath: this.computedPath.concat([this.groupStructure.name, 'attachments'])
+        computedPath: this.computedPath.concat([this.groupStructure.name, 'attachments']),
+        errors: this._errors.attachments
       },
       readonly: this._readonly
     }).then((response: GenericObject) => {
@@ -203,14 +203,17 @@ export class FormCollapsedCard extends FormAbstractGroup implements IFormBuilder
       }
 
       this._value.attachments = response.attachments;
+      delete this._errors.attachments;
+      fireEvent(this, 'error-changed', {error: Object.keys(this._errors).length ? this._errors : null});
       fireEvent(this, 'attachments-changed', {attachments: this._value.attachments});
       if (this.isEditMode) {
-        const tmp: GenericObject = clone(this.originalValue);
+        const tmp: GenericObject = clone(this.originalValue) || {};
         tmp.attachments = response.attachments;
         fireEvent(this, 'value-changed', {value: tmp});
       } else {
         this.saveChanges();
       }
+      this.performUpdate();
     });
   }
 
