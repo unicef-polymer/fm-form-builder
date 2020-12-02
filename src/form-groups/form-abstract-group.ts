@@ -210,7 +210,9 @@ export class FormAbstractGroup extends LitElement implements IFormBuilderAbstrac
           .value="${this.value && this.value[groupStructure.name]}"
           .metadata="${this.metadata}"
           .parentGroupName="${this.groupStructure.name}"
-          .computedPath="${this.computedPath.concat([this.groupStructure.name])}"
+          .computedPath="${this.computedPath.concat(
+            this.groupStructure.name === 'root' ? [] : [this.groupStructure.name]
+          )}"
           .readonly="${this.readonly}"
           .errors="${this._errors[groupStructure.name] || null}"
           @value-changed="${(event: CustomEvent) => this.valueChanged(event, groupStructure.name)}"
@@ -224,7 +226,9 @@ export class FormAbstractGroup extends LitElement implements IFormBuilderAbstrac
           .value="${this.value && this.value[groupStructure.name]}"
           .metadata="${this.metadata}"
           .parentGroupName="${this.groupStructure.name}"
-          .computedPath="${this.computedPath.concat([this.groupStructure.name])}"
+          .computedPath="${this.computedPath.concat(
+            this.groupStructure.name === 'root' ? [] : [this.groupStructure.name]
+          )}"
           .readonly="${this.readonly}"
           .errors="${this._errors[groupStructure.name] || null}"
           @value-changed="${(event: CustomEvent) => this.valueChanged(event, groupStructure.name)}"
@@ -238,7 +242,9 @@ export class FormAbstractGroup extends LitElement implements IFormBuilderAbstrac
           .value="${this.value && this.value[groupStructure.name]}"
           .metadata="${this.metadata}"
           .parentGroupName="${this.groupStructure.name}"
-          .computedPath="${this.computedPath.concat([this.groupStructure.name])}"
+          .computedPath="${this.computedPath.concat(
+            this.groupStructure.name === 'root' ? [] : [this.groupStructure.name]
+          )}"
           .readonly="${this.readonly}"
           .errors="${this._errors[groupStructure.name] || null}"
           @value-changed="${(event: CustomEvent) => this.valueChanged(event, groupStructure.name)}"
@@ -311,6 +317,10 @@ export class FormAbstractGroup extends LitElement implements IFormBuilderAbstrac
 
         .card-container.form-card {
           padding: 12px 0 15px;
+        }
+
+        .attachments-warning {
+          color: red;
         }
       `
     ];

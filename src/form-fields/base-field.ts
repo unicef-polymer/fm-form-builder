@@ -51,6 +51,7 @@ export abstract class BaseField<T> extends LitElement {
     if (this._errorMessage !== errorMessage) {
       fireEvent(this, 'error-changed', {error: errorMessage});
       this._errorMessage = errorMessage;
+      this.performUpdate();
     }
   }
 

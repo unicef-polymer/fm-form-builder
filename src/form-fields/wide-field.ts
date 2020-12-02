@@ -1,12 +1,14 @@
-import {html, TemplateResult, property} from 'lit-element';
+import {html, TemplateResult, property, CSSResultArray} from 'lit-element';
 import {BaseField} from './base-field';
 import '@polymer/paper-input/paper-textarea';
+import {InputStyles} from '../lib/styles/input-styles';
 
 export class WideField extends BaseField<string> {
   @property() label: string = '';
   @property() placeholder: string = '';
   protected render(): TemplateResult {
     return html`
+      ${InputStyles}
       <paper-textarea
         class="wide-input disabled-as-readonly form-control"
         always-float-label
@@ -29,5 +31,10 @@ export class WideField extends BaseField<string> {
 
   protected customValidation(): string | null {
     return null;
+  }
+
+  static get styles(): CSSResultArray {
+    // language=CSS
+    return [...BaseField.styles];
   }
 }

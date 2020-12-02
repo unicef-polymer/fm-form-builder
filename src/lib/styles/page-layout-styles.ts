@@ -192,4 +192,10 @@ export const pageLayoutStyles: CSSResult = css`
   .w330px {
     width: 330px;
   }
+
+  @media (max-width: 768px) {
+    .page-content {
+      margin: 8px;
+    }
+  }
 `;
