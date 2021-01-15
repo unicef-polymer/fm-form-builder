@@ -7,6 +7,7 @@ export abstract class BaseField<T> extends LitElement {
   @property({type: String}) questionText: string = '';
   @property({type: Boolean, attribute: 'is-readonly'}) isReadonly: boolean = false;
   @property({type: Boolean, attribute: 'required', reflect: true}) required: boolean = false;
+  @property() placeholder: string = '';
   @property() value: T | null = null;
   validators: FieldValidator[] = [];
   set errorMessage(message: string | null) {
