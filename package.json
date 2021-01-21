@@ -15,7 +15,7 @@
   "scripts": {
     "build": "tsc --skipLibCheck",
     "lint": "./node_modules/eslint/bin/eslint.js 'src/**'",
-    "preversion": "npm run lint"
+    "prepare": "rm -rf ./dist && npm run build"
   },
   "dependencies": {
     "@polymer/iron-collapse": "^3.0.1",
