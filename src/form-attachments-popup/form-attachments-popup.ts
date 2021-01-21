@@ -207,7 +207,7 @@ export class FormAttachmentsPopup extends LitElement {
        */
       this.filesForRemove.push(attachment.attachment as string);
     }
-    this.performUpdate();
+    this.attachments = [...this.attachments];
   }
 
   private isUploadedAttachment(
