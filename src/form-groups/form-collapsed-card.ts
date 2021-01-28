@@ -213,7 +213,7 @@ export class FormCollapsedCard extends FormAbstractGroup implements IFormBuilder
       } else {
         this.saveChanges();
       }
-      this.performUpdate();
+      this.requestUpdate();
     });
   }
 

@@ -124,7 +124,7 @@ export class FormAttachmentsPopup extends LitElement {
         this.errors[index] = [];
       }
     });
-    this.performUpdate();
+    this.requestUpdate();
     if (fileTypeNotSelected) {
       return;
     }
@@ -162,7 +162,7 @@ export class FormAttachmentsPopup extends LitElement {
     if (newType && attachment.file_type !== newType) {
       attachment.file_type = newType;
       this.errors[index] = [];
-      this.performUpdate();
+      this.requestUpdate();
     }
   }
 
@@ -207,7 +207,7 @@ export class FormAttachmentsPopup extends LitElement {
        */
       this.filesForRemove.push(attachment.attachment as string);
     }
-    this.performUpdate();
+    this.attachments = [...this.attachments];
   }
 
   private isUploadedAttachment(
