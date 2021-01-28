@@ -87,7 +87,7 @@ export function template(this: FormAttachmentsPopup): TemplateResult {
           activate-offline
           ?hidden="${this.readonly}"
           @upload-finished="${({detail}: CustomEvent) => this.attachmentsUploaded(detail)}"
-          .endpointInfo="${{endpoint: this.uploadUrl}}"
+          .endpointInfo="${{endpoint: this.uploadUrl, extraInfo: {composedPath: this.computedPath}}}"
           .jwtLocalStorageKey="${this.jwtLocalStorageKey}"
         >
         </etools-upload-multi>
