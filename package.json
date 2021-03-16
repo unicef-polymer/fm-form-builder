@@ -1,7 +1,7 @@
 {
   "name": "@unicef-polymer/etools-form-builder",
   "description": "Etools FM Form Builder components",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "contributors": [
     "eTools Team"
   ],
@@ -27,9 +27,9 @@
     "@polymer/paper-radio-group": "^3.0.1",
     "@polymer/paper-toast": "^3.0.1",
     "@types/ramda": "^0.26.43",
-    "@unicef-polymer/etools-dialog": "^4.0.0",
-    "@unicef-polymer/etools-dropdown": "^3.1.6",
-    "@unicef-polymer/etools-upload": "^3.3.0",
+    "@unicef-polymer/etools-dialog": "^4.2.1",
+    "@unicef-polymer/etools-dropdown": "^3.3.0",
+    "@unicef-polymer/etools-upload": "^3.4.0",
     "@webcomponents/webcomponentsjs": "^2.5.0",
     "lit-element": "^2.4.0",
     "lit-translate": "^1.1.20",
