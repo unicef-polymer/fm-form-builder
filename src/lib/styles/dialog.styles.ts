@@ -14,21 +14,24 @@ export const DialogStyles: TemplateResult = html`
 
     #form-attachments-dialog etools-dialog {
       --etools-dialog-primary-color: var(--primary-color);
-      --etools-dialog-scrollable: {
-        margin-top: 0;
-        padding-top: 12px !important;
-      }
       --etools-dialog-content: {
         min-height: 80px;
         padding-bottom: 8px !important;
         padding-top: 0px !important;
       }
-      --etools-dialog-button-styles: {
-        margin-top: 0;
-      }
-      --etools-dialog-title: {
-        padding: 8px 45px 8px 24px;
-      }
+    }
+
+    #form-attachments-dialog etools-dialog::part(ed-scrollable) {
+      margin-top: 0;
+      padding-top: 12px !important;
+    }
+
+    #form-attachments-dialog etools-dialog::part(ecp-header-title) {
+      padding: 8px 45px 8px 24px;
+    }
+
+    #form-attachments-dialog etools-dialog::part(ed-button-styles) {
+      margin-top: 0;
     }
 
     #form-attachments-dialog etools-dialog > etools-loading {
@@ -37,28 +40,20 @@ export const DialogStyles: TemplateResult = html`
 
     #form-attachments-dialog etools-content-panel {
       position: relative;
+    }
 
-      --ecp-header-title: {
-        line-height: 48px;
-      }
+    #form-attachments-dialog etools-content-panel::part(ecp-header-title) {
+      font-weight: 500;
+      line-height: 48px;
+      padding: 0 30px;
+    }
 
-      --ecp-expand-btn: {
-        position: absolute;
-        top: 3px;
-        left: 13px;
-        width: 45px;
-        height: 45px;
-      }
-
-      --ecp-header-title: {
-        font-weight: 500;
-        line-height: 48px;
-        padding: 0 30px;
-      }
-
-      --ecp-header-btns-wrapper: {
-        opacity: 1;
-      }
+    #form-attachments-dialog etools-content-panel::part(ecp-toggle-btn) {
+      position: absolute;
+      top: 3px;
+      left: 13px;
+      width: 45px;
+      height: 45px;
     }
 
     #form-attachments-dialog etools-dialog .container {
