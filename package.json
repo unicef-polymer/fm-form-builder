@@ -1,11 +1,7 @@
 {
   "name": "@unicef-polymer/etools-form-builder",
   "description": "Etools FM Form Builder components",
-<<<<<<< HEAD
-  "version": "0.1.20-rc.1",
-=======
   "version": "0.1.21",
->>>>>>> develop
   "contributors": [
     "eTools Team"
   ],
