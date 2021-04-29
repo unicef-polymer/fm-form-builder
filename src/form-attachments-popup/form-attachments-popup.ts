@@ -125,7 +125,7 @@ export class FormAttachmentsPopup extends LitElement {
       }
     });
     this.requestUpdate();
-    if (fileTypeNotSelected) {      
+    if (fileTypeNotSelected) {
       return;
     }
 
